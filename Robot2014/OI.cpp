@@ -12,7 +12,7 @@
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/AutonomousCommand.h"
 #include "Commands/PickUp.h"
-#include "Commands/RotateArm.h"
+#include "Commands/RotateClaw.h"
 #include "Commands/SavePosition.h"
 #include "Commands/SaveShoot.h"
 #include "Commands/Shoot.h"
@@ -38,7 +38,7 @@ OI::OI() {
 	shootButton1->WhenPressed(new Shoot());
      
         // SmartDashboard Buttons
-	SmartDashboard::PutData("RotateArm", new RotateArm());
+	SmartDashboard::PutData("RotateClaw", new RotateClaw());
 	SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());
 	SmartDashboard::PutData("SavePosition", new SavePosition());
 	SmartDashboard::PutData("SaveShoot", new SaveShoot());
