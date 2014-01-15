@@ -18,7 +18,7 @@ SavePosition::SavePosition() {
 }
 // Called just before this Command runs the first time
 void SavePosition::Initialize() {
-	Robot::claw->SavedPosition =
+	Robot::claw->SavePosition =
 Robot::claw->potentiometer1->GetValue();
 
 }
@@ -28,7 +28,7 @@ void SavePosition::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool SavePosition::IsFinished() {
-	return false;
+	return true;
 }
 // Called once after isFinished returns true
 void SavePosition::End() {
