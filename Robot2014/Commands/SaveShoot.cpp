@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "SaveShoot.h"
+#include "../OI.h"
 SaveShoot::SaveShoot() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -17,10 +18,11 @@ SaveShoot::SaveShoot() {
 }
 // Called just before this Command runs the first time
 void SaveShoot::Initialize() {
+	Robot::claw->GoToSavedPosition();	
 }
 // Called repeatedly when this Command is scheduled to run
 void SaveShoot::Execute() {
-	
+		
 }
 // Make this return true when this Command no longer needs to run execute()
 bool SaveShoot::IsFinished() {

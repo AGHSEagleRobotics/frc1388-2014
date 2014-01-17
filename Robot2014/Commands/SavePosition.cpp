@@ -18,9 +18,8 @@ SavePosition::SavePosition() {
 }
 // Called just before this Command runs the first time
 void SavePosition::Initialize() {
-	Robot::claw->SavePosition =
+	Robot::claw->savePosition =
 Robot::claw->potentiometer1->GetValue();
-
 }
 // Called repeatedly when this Command is scheduled to run
 void SavePosition::Execute() {

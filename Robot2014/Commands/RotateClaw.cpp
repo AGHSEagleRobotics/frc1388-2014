@@ -28,6 +28,10 @@ void RotateClaw::Execute() {
 	{
 	Robot::claw->armMotor->Set(0.0);
 	}
+	if(Robot::claw->backLimitSwitch->Get() == true)
+	{
+	Robot::claw->armMotor->Set(0.0);
+	}
 }
 // Make this return true when this Command no longer needs to run execute()
 bool RotateClaw::IsFinished() {

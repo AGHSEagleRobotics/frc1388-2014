@@ -29,12 +29,10 @@ void DriveTrain::InitDefaultCommand() {
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-
 void DriveTrain::SetRightSetpoint(float setpoint)
 {	
 	rightPID->SetSetpoint(setpoint);
 }
-
 void DriveTrain::SetLeftSetpoint(float setpoint)
 {
 	leftPID->SetSetpoint(setpoint);
