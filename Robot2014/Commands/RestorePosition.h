@@ -9,8 +9,8 @@
 // it from being updated in th future.
 
 
-#ifndef SAVESHOOT_H
-#define SAVESHOOT_H
+#ifndef RESTOREPOSITION_H
+#define RESTOREPOSITION_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,9 +21,9 @@
  *
  * @author ExampleAuthor
  */
-class SaveShoot: public Command {
+class RestorePosition: public Command {
 public:
-	SaveShoot();
+	RestorePosition();
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
