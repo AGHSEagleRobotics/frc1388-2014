@@ -20,7 +20,7 @@ SavePosition::SavePosition() {
 void SavePosition::Initialize() {
 	
 	Robot::claw->savePosition =
-Robot::claw->quadClawEncoder->PIDGet();
+Robot::claw->quadClawEncoder->PIDGet(); //TODO: make sure PIDGet() is the correct function
 }
 // Called repeatedly when this Command is scheduled to run
 void SavePosition::Execute() {

@@ -23,8 +23,12 @@ void RotateClaw::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void RotateClaw::Execute() {
 	if (Robot::claw->initializedPosition == false)
-	{
+	{	
+		//TODO: zero switch setsetpoint relative
+		//we are reseting the encoder and setting the setpoint to zero
 		Robot::claw->quadClawEncoder->Reset();
+		Robot::claw->SetSetpoint(POSITION_UP);
+			Robot::claw->initializedPosition = true;
 		//TODO: verify that this code is good 
 		
 	} else {
