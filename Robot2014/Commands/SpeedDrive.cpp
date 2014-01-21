@@ -18,31 +18,48 @@ SpeedDrive::SpeedDrive() {
 // Called just before this Command runs the first time
 void SpeedDrive::Initialize()
 {
-	Robot::driveTrain->leftPID->Enable();
-	Robot::driveTrain->rightPID->Enable();
+
 }
 // Called repeatedly when this Command is scheduled to run
 void SpeedDrive::Execute()
 {
-	float rightSetpoint;
-	float leftSetpoint;
+	float leftStick = Robot::oi->getLeftYAxis();
+	float rightStick = Robot::oi->getRightYAxis();	
+	float rawLeftCount = (float) Robot::driveTrain->leftEncoder->Get();
+	float rawRightCount = (float) Robot::driveTrain->rightEncoder->Get();
 	
-//	Multiple the setpoint by a scalar to get a speed so max speed is 10 feet/sec
-	rightSetpoint = Robot::oi->getRightXAxis() * 10;
+	// 500 represents the counts for full speed
+	float scaledLeftCount = (rawLeftCount / 500.0);
+	float scaledRightCount = (rawRightCount / 500.0);
 	
-	Robot::driveTrain->SetRightSetpoint(rightSetpoint);
+	// 0.0280499 is the feet per counts on Pheonix
 	
-//	Multiple the setpoint by a scalar to get a speed so max speed is 10 feet/sec
-	leftSetpoint = Robot::oi->getLeftXAxis() * 10;
+	// limits the range of the error
+	float leftError = leftStick - (scaledLeftCount * Robot::SignOf(leftStick));
+	if(leftError > 0.2)
+	{
+		leftError = 0.2;
+	}
+	else if(leftError < -0.2)
+	{
+		leftError = -0.2;
+	}
 	
-	Robot::driveTrain->SetLeftSetpoint(leftSetpoint);
+	float rightError = rightStick - (scaledRightCount * Robot::SignOf(rightStick));
+	if(rightError > 0.2)
+	{
+		rightError = 0.2;
+	}
+	else if(rightError < -0.2)
+	{
+		rightError = -0.2;
+	}
 	
-//	rightError = ((rightSetpoint - rightFeedback) / 10) * 12;
-//	
-//	rightOutput = (rightError / 10) * 12;
-//	
-//	Robot::driveTrain->rightPID(rightOutput);
+	Robot::driveTrain->leftMotor->Set(leftStick + leftError);
+	Robot::driveTrain->rightMotor->Set(rightStick + rightError);
 	
+	Robot::driveTrain->leftEncoder->Reset();
+	Robot::driveTrain->rightEncoder->Reset();
 }
 // Make this return true when this Command no longer needs to run execute()
 bool SpeedDrive::IsFinished() {
@@ -51,8 +68,7 @@ bool SpeedDrive::IsFinished() {
 // Called once after isFinished returns true
 void SpeedDrive::End()
 {
-	Robot::driveTrain->leftPID->Disable();
-	Robot::driveTrain->rightPID->Disable();
+
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
