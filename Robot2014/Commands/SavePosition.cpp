@@ -18,6 +18,7 @@ SavePosition::SavePosition() {
 }
 // Called just before this Command runs the first time
 void SavePosition::Initialize() {
+	
 	Robot::claw->savePosition =
 Robot::claw->quadClawEncoder->PIDGet();
 }

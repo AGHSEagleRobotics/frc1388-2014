@@ -11,12 +11,10 @@
 #define CLAW_H
 #include "Commands/PIDSubsystem.h"
 #include "WPILib.h"
-
 //The below numbers are the number of degrees from the straight up position
 #define POSITION_UP		0
 #define POSITION_SHOOT 	45
 #define POSITION_LOAD 	100
-
 /**
  *
  *

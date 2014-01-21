@@ -24,17 +24,20 @@ void RotateClaw::Initialize() {
 void RotateClaw::Execute() {
 	if (Robot::claw->initializedPosition == false)
 	{
-		//TODO: enter reset position code here.
+		Robot::claw->quadClawEncoder->Reset();
+		//TODO: verify that this code is good 
+		
 	} else {
 		// TODO:Change GetY so it doesnt fight the pid system and maybe limit switches
-
 		Robot::claw->armMotor->Set(
 				Robot::oi->getOpStick()->GetY());
+		
 		if (Robot::claw->frontLimitSwitch->Get() == true)
 		{
 			Robot::claw->armMotor->Set(0.0);
 		}
 		if(Robot::claw->backLimitSwitch->Get() == true)
+		
 		{
 			Robot::claw->armMotor->Set(0.0);
 		}

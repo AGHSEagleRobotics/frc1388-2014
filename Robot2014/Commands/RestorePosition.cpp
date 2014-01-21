@@ -18,6 +18,7 @@ RestorePosition::RestorePosition() {
 }
 // Called just before this Command runs the first time
 void RestorePosition::Initialize() {		
+	//TODO: Review this code
 	Robot::claw->GoToSavedPosition();
 	Robot::claw->quadClawEncoder->Get();
 }
