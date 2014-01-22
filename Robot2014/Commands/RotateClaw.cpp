@@ -28,7 +28,7 @@ void RotateClaw::Execute() {
 			{
 				Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
 			}else{
-				Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
+				Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
 			}
 
 		//we are reseting the encoder and setting the setpoint to zero
@@ -55,7 +55,7 @@ void RotateClaw::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool RotateClaw::IsFinished() {
-	return true;
+	return false;
 }
 // Called once after isFinished returns true
 void RotateClaw::End() {

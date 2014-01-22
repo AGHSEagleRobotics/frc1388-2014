@@ -19,8 +19,10 @@ RestorePosition::RestorePosition() {
 // Called just before this Command runs the first time
 void RestorePosition::Initialize() {		
 	//TODO: Review this code
+	if (Robot::claw->savedPositionExist == true)
+	{
 	Robot::claw->GoToSavedPosition();
-	Robot::claw->quadClawEncoder->Get();
+	}
 }
 // Called repeatedly when this Command is scheduled to run
 void RestorePosition::Execute() {
@@ -28,7 +30,7 @@ void RestorePosition::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool RestorePosition::IsFinished() {
-	return false;
+	return true;
 }
 // Called once after isFinished returns true
 void RestorePosition::End() {

@@ -32,7 +32,7 @@ Claw::Claw() : PIDSubsystem("Claw", 1.0, 0.0, 0.0) {
 	
 	//Set the intial position to false so we can reset later
 	initializedPosition = false;
-	Zeroswitchinit = zeroSwitch->Get();
+	zeroSwitchInit = zeroSwitch->Get();
 }
 double Claw::ReturnPIDInput() {
 	// Return your input value for the PID loop
