@@ -15,6 +15,7 @@
 #define POSITION_UP		0
 #define POSITION_SHOOT 	45
 #define POSITION_LOAD 	100
+#define SMALL_MOVEMENT  1/50
 /**
  *
  *
@@ -36,5 +37,6 @@ class Claw: public PIDSubsystem {
 	void GoToSavedPosition();
 	double savePosition;
 	bool initializedPosition;
+	bool Zeroswitchinit;
 };
 #endif
