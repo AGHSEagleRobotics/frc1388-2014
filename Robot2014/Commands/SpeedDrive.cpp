@@ -18,7 +18,6 @@ SpeedDrive::SpeedDrive() {
 // Called just before this Command runs the first time
 void SpeedDrive::Initialize()
 {
-
 }
 // Called repeatedly when this Command is scheduled to run
 void SpeedDrive::Execute()
@@ -27,6 +26,8 @@ void SpeedDrive::Execute()
 	float rightStick = Robot::oi->getRightYAxis();	
 	float rawLeftCount = (float) Robot::driveTrain->leftEncoder->Get();
 	float rawRightCount = (float) Robot::driveTrain->rightEncoder->Get();
+	
+	printf("Raw Left Encoder: %f, Raw Right Encoder: %f", rawLeftCount, rawRightCount);
 	
 	// 500 represents the counts for full speed
 	float scaledLeftCount = (rawLeftCount / 500.0);
@@ -68,7 +69,6 @@ bool SpeedDrive::IsFinished() {
 // Called once after isFinished returns true
 void SpeedDrive::End()
 {
-
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

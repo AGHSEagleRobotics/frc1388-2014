@@ -56,7 +56,6 @@ void Robot::TeleopPeriodic() {
 void Robot::TestPeriodic() {
 	lw->Run();
 }
-
 float Robot::SignOf(float number)
 {
 	if(number < 0)

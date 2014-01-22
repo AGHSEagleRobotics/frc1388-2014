@@ -14,7 +14,6 @@ Encoder* RobotMap::clawQuadClawEncoder = NULL;
 SpeedController* RobotMap::clawArmMotor = NULL;
 DigitalInput* RobotMap::clawFrontLimitSwitch = NULL;
 DigitalInput* RobotMap::clawBackLimitSwitch = NULL;
-DigitalInput* RobotMap::clawZeroSwitch = NULL;
 SpeedController* RobotMap::driveTrainRightMotor = NULL;
 Encoder* RobotMap::driveTrainRightEncoder = NULL;
 SpeedController* RobotMap::driveTrainLeftMotor = NULL;
@@ -37,13 +36,10 @@ void RobotMap::init() {
 	clawBackLimitSwitch = new DigitalInput(1, 10);
 	lw->AddSensor("Claw", "BackLimitSwitch", clawBackLimitSwitch);
 	
-	clawZeroSwitch = new DigitalInput(1, 5);
-	lw->AddSensor("Claw", "ZeroSwitch", clawZeroSwitch);
-	
 	driveTrainRightMotor = new Victor(1, 3);
 	lw->AddActuator("DriveTrain", "RightMotor", (Victor*) driveTrainRightMotor);
 	
-	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, false, Encoder::k1X);
+	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "RightEncoder", driveTrainRightEncoder);
 	driveTrainRightEncoder->SetDistancePerPulse(0.014361566);
         driveTrainRightEncoder->SetPIDSourceParameter(Encoder::kRate);
@@ -51,7 +47,7 @@ void RobotMap::init() {
 	driveTrainLeftMotor = new Victor(1, 1);
 	lw->AddActuator("DriveTrain", "LeftMotor", (Victor*) driveTrainLeftMotor);
 	
-	driveTrainLeftEncoder = new Encoder(1, 1, 1, 2, false, Encoder::k1X);
+	driveTrainLeftEncoder = new Encoder(1, 1, 1, 2, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "LeftEncoder", driveTrainLeftEncoder);
 	driveTrainLeftEncoder->SetDistancePerPulse(0.014361566);
         driveTrainLeftEncoder->SetPIDSourceParameter(Encoder::kRate);
