@@ -14,6 +14,7 @@
 #include "Commands/Drive.h"
 #include "Commands/GoToUp.h"
 #include "Commands/PickUp.h"
+#include "Commands/PositionDrive.h"
 #include "Commands/RestorePosition.h"
 #include "Commands/RotateClaw.h"
 #include "Commands/SavePosition.h"
@@ -43,6 +44,8 @@ OI::OI() {
 	shootButton2->WhenPressed(new Shoot());
 	leftDriverStick = new Joystick(1);
 	
+	joystickButton1 = new JoystickButton(leftDriverStick, 9);
+	joystickButton1->WhenPressed(new PositionDrive());
 	speedDriveNow = new JoystickButton(leftDriverStick, 11);
 	speedDriveNow->WhenPressed(new SpeedDrive());
 	driveNow = new JoystickButton(leftDriverStick, 10);
@@ -51,6 +54,7 @@ OI::OI() {
 	shootButton1->WhenPressed(new Shoot());
      
         // SmartDashboard Buttons
+	SmartDashboard::PutData("PositionDrive", new PositionDrive());
 	SmartDashboard::PutData("RotateClaw", new RotateClaw());
 	SmartDashboard::PutData("Drive", new Drive());
 	SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());

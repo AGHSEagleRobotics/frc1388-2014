@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "SpeedDrive.h"
+#include "Math.h"
 SpeedDrive::SpeedDrive() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -23,44 +24,49 @@ void SpeedDrive::Initialize()
 void SpeedDrive::Execute()
 {
 	float leftStick = Robot::oi->getLeftYAxis();
-	float rightStick = Robot::oi->getRightYAxis();	
+	float rightStick = -(Robot::oi->getRightYAxis());	
 	float rawLeftCount = (float) Robot::driveTrain->leftEncoder->Get();
 	float rawRightCount = (float) Robot::driveTrain->rightEncoder->Get();
 	
-	printf("Raw Left Encoder: %f, Raw Right Encoder: %f", rawLeftCount, rawRightCount);
+	printf("Raw Left Encoder: %f, Raw Right Encoder: %f \r\n", rawLeftCount, rawRightCount);
 	
 	// 500 represents the counts for full speed
-	float scaledLeftCount = (rawLeftCount / 500.0);
-	float scaledRightCount = (rawRightCount / 500.0);
+	float scaledLeftCount = (rawLeftCount / 16.0);
+	float scaledRightCount = (rawRightCount / 16.0);
 	
 	// 0.0280499 is the feet per counts on Pheonix
 	
 	// limits the range of the error
 	float leftError = leftStick - (scaledLeftCount * Robot::SignOf(leftStick));
-	if(leftError > 0.2)
+	if(leftError > 0.5)
 	{
-		leftError = 0.2;
+		leftError = 0.5;
 	}
-	else if(leftError < -0.2)
+	else if(leftError < -0.5)
 	{
-		leftError = -0.2;
+		leftError = -0.5;
 	}
 	
 	float rightError = rightStick - (scaledRightCount * Robot::SignOf(rightStick));
-	if(rightError > 0.2)
+	if(rightError > 0.5)
 	{
-		rightError = 0.2;
+		rightError = 0.5;
 	}
-	else if(rightError < -0.2)
+	else if(rightError < -0.5)
 	{
-		rightError = -0.2;
+		rightError = -0.5;
 	}
 	
-	Robot::driveTrain->leftMotor->Set(leftStick + leftError);
-	Robot::driveTrain->rightMotor->Set(rightStick + rightError);
+	Robot::driveTrain->leftMotor->Set(leftError);
+	Robot::driveTrain->rightMotor->Set(rightError);
 	
-	Robot::driveTrain->leftEncoder->Reset();
-	Robot::driveTrain->rightEncoder->Reset();
+	printf("Left Motor Power: %f, Right Motor Power: %f \r\n", Robot::driveTrain->leftMotor->Get(),
+			Robot::driveTrain->rightMotor->Get());
+	if(fabs(leftStick) < 0.05 || fabs(rightStick) < 0.05)
+	{
+		Robot::driveTrain->leftEncoder->Reset();
+		Robot::driveTrain->rightEncoder->Reset();
+	}
 }
 // Make this return true when this Command no longer needs to run execute()
 bool SpeedDrive::IsFinished() {
