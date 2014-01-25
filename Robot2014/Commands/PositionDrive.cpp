@@ -47,13 +47,12 @@ void PositionDrive::Execute() {
 	float rightPower = (rightPositionSetpoint - Robot::SignOf(rightEncoderPosition)) * 0.33;
 	
 	printf("Right Power: %f, Left Power: %f \r\n", rightPower, leftPower);
-
-	if(fabs(leftStick) < 0.1 )
+	if(fabs(leftStick) < 0.1)
 	{
 	Robot::driveTrain->leftMotor->Set(0);
 	}
 	
-	if(fabs(rightStick) < 0.1 )
+	if(fabs(rightStick) < 0.1)
 	{
 	Robot::driveTrain->rightMotor->Set(0);
 	}

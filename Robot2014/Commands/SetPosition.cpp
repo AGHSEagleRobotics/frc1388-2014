@@ -28,8 +28,6 @@ SetPosition::SetPosition(int setPosition) {
 // Called just before this Command runs the first time
 void SetPosition::Initialize() {
 	Robot::claw->SetSetpoint(SetPosition::position);
-	
-	
 }
 
 // Called repeatedly when this Command is scheduled to run

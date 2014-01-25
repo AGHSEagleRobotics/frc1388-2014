@@ -25,18 +25,23 @@ void RotateClaw::Execute() {
 	{	
 		//TODO: verify code
 		if (Robot::claw->zeroSwitch->Get() == true)
-			{
-				Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
-			}else{
-				Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
-			}
+		{
+			Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
+		}
+		else
+		{
+			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
+		}
+		
 		//we are reseting the encoder and setting the setpoint to zero
 		Robot::claw->quadClawEncoder->Reset();
 		Robot::claw->SetSetpoint(POSITION_UP);
 			Robot::claw->initializedPosition = true;
-		//TODO: verify that this code is good 
-		
-	} else {
+		//TODO: verify that this code is good 	
+	} 
+	
+	else
+	{
 		// TODO:Change GetY so it doesnt fight the pid system and maybe limit switches
 		Robot::claw->armMotor->Set(
 				Robot::oi->getOpStick()->GetY());
@@ -45,8 +50,8 @@ void RotateClaw::Execute() {
 		{
 			Robot::claw->armMotor->Set(0.0);
 		}
-		if(Robot::claw->backLimitSwitch->Get() == true)
 		
+		if(Robot::claw->backLimitSwitch->Get() == true)
 		{
 			Robot::claw->armMotor->Set(0.0);
 		}

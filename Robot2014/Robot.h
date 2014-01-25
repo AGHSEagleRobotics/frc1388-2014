@@ -35,5 +35,6 @@ public:
 	virtual void TeleopPeriodic();
 	virtual void TestPeriodic();
 	static float SignOf(float number);
+	static float JoystickDeadband(float value);
 };
 #endif
