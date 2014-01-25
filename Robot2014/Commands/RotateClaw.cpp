@@ -30,7 +30,6 @@ void RotateClaw::Execute() {
 			}else{
 				Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
 			}
-
 		//we are reseting the encoder and setting the setpoint to zero
 		Robot::claw->quadClawEncoder->Reset();
 		Robot::claw->SetSetpoint(POSITION_UP);
