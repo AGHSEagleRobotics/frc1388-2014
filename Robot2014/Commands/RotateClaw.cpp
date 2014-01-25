@@ -18,13 +18,18 @@ RotateClaw::RotateClaw() {
 }
 // Called just before this Command runs the first time
 void RotateClaw::Initialize() {
-	
-}
+	}
 // Called repeatedly when this Command is scheduled to run
 void RotateClaw::Execute() {
 	if (Robot::claw->initializedPosition == false)
 	{	
-		//TODO: zero switch setsetpoint relative
+		//TODO: verify code
+		if (Robot::claw->zeroSwitch->Get() == true)
+			{
+				Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
+			}else{
+				Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
+			}
 		//we are reseting the encoder and setting the setpoint to zero
 		Robot::claw->quadClawEncoder->Reset();
 		Robot::claw->SetSetpoint(POSITION_UP);
