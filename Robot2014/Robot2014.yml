@@ -287,7 +287,7 @@ Children:
           name: Reverse Direction, validators: null, value: false}
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Default Command, type: Command, validators: null, value: SpeedDrive}
+        name: Default Command, type: Command, validators: null, value: Drive}
   Properties: {}
 - Name: Operator Interface
   Base: OI
@@ -368,7 +368,7 @@ Children:
           name: When to Run
           validators: null
           value: whenPressed
-    - Name: Joystick Button 1
+    - Name: PositionDriveNow
       Base: Joystick Button
       Children: []
       Properties:
@@ -383,7 +383,7 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '9'
+          value: '3'
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
           name: Joystick, validators: null, value: LeftDriverStick}
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
@@ -391,7 +391,7 @@ Children:
           default: whileHeld
           name: When to Run
           validators: null
-          value: whenPressed
+          value: whileHeld
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: &id023 ['1', '2', '3', '4']
@@ -596,7 +596,7 @@ Children:
     Children: []
     Properties:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: None}
+        name: Requires, type: Subsystem, validators: null, value: DriveTrain}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
   - Name: RotateClaw

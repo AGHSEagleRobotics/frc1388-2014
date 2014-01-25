@@ -23,7 +23,7 @@ private:
 	Joystick* rightDriverStick;
 	JoystickButton* shootButton2;
 	Joystick* leftDriverStick;
-	JoystickButton* joystickButton1;
+	JoystickButton* positionDriveNow;
 	JoystickButton* speedDriveNow;
 	JoystickButton* driveNow;
 	JoystickButton* shootButton1;

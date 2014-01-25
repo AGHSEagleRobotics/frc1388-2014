@@ -44,8 +44,8 @@ OI::OI() {
 	shootButton2->WhenPressed(new Shoot());
 	leftDriverStick = new Joystick(1);
 	
-	joystickButton1 = new JoystickButton(leftDriverStick, 9);
-	joystickButton1->WhenPressed(new PositionDrive());
+	positionDriveNow = new JoystickButton(leftDriverStick, 3);
+	positionDriveNow->WhileHeld(new PositionDrive());
 	speedDriveNow = new JoystickButton(leftDriverStick, 11);
 	speedDriveNow->WhenPressed(new SpeedDrive());
 	driveNow = new JoystickButton(leftDriverStick, 10);
