@@ -24,22 +24,21 @@ void AddedPowerDrive::Execute() {
 	
 	float leftEncoderRate = Robot::driveTrain->leftEncoder->GetRate();
 	float rightEncoderRate = Robot::driveTrain->rightEncoder->GetRate();
+	
 	float leftPower = Robot::oi->getRightYAxis();
 	float rightPower = -(Robot::oi->getLeftYAxis());
 	
 	printf("Left Rate: %f, Right Rate: %f \r\n Left Stick: %f, Right Stick: %f \r\n",
 			leftEncoderRate, rightEncoderRate, leftPower, rightPower);
 	
+//	If the encoders are not moving and power is applied to the joystick then apply a flat voltage
+//		with the stick value to break stickion.
 	if((leftEncoderRate < 1 || rightEncoderRate < 1) && (leftPower > 0.1 || rightPower > 0.1))
 	{
-		Robot::driveTrain->leftMotor->Set(leftPower + 0.25);
-		Robot::driveTrain->rightMotor->Set(rightPower + 0.25);
+//		0.25 is still subject to change
+		Robot::driveTrain->leftMotor->Set(leftPower + (Robot::SignOf(leftPower) * 0.25));
+		Robot::driveTrain->rightMotor->Set(rightPower + (Robot::SignOf(rightPower) * 0.25));
 		
-//		if(leftEncoderRate < 3 || rightEncoderRate < 3)
-//		{
-//			Robot::driveTrain->leftMotor->Set(leftPower / 2);
-//			Robot::driveTrain->rightMotor->Set(rightPower / 2);	
-//		}
 	}
 	else
 	{
