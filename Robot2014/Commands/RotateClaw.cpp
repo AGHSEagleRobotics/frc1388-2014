@@ -21,51 +21,54 @@ void RotateClaw::Initialize() {
 	}
 // Called repeatedly when this Command is scheduled to run
 void RotateClaw::Execute() {
-	if (Robot::claw->initializedPosition == false)
-	{	
+	if (Robot::claw->initializedPosition == false){	
 		//TODO: verify code
-		if (Robot::claw->zeroSwitch->Get() == true)
-		{
+		if (Robot::claw->zeroSwitch->Get() == true){
 			Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
-		}
-		else
-		{
+		}else{
 			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
 		}
-		
-		//we are reseting the encoder and setting the setpoint to zero
-		Robot::claw->quadClawEncoder->Reset();
-		Robot::claw->SetSetpoint(POSITION_UP);
+		if(Robot::claw->zeroSwitch->Get() != Robot::claw->zeroSwitchInit ){
+			//This code resets the pid controller and the claw encoder so they will function  
+			Robot::claw->Disable();//Disable PID Controller
+			Robot::claw->quadClawEncoder->Reset();
+			Robot::claw->SetSetpoint(POSITION_UP);
+			Robot::claw->Reset();
+			Robot::claw->Enable();//enable PID Controller
+			
 			Robot::claw->initializedPosition = true;
-		//TODO: verify that this code is good 	
-	} 
-	
-	else
-	{
-		// TODO:Change GetY so it doesnt fight the pid system and maybe limit switches
+		}	
+		//TODO: test code 
+		} else {
+		// TODO:Change GetY so it doesnt fight the pid system and maybe limit switches		
+			
 		Robot::claw->armMotor->Set(
 				Robot::oi->getOpStick()->GetY());
 		
-		if (Robot::claw->frontLimitSwitch->Get() == true)
-		{
-			Robot::claw->armMotor->Set(0.0);
-		}
 		
-		if(Robot::claw->backLimitSwitch->Get() == true)
-		{
+		if (Robot::claw->frontLimitSwitch->Get() == true && Robot::oi->getOpStick()->GetY()  >= 0 ){
 			Robot::claw->armMotor->Set(0.0);
-		}
-	}
-}
+			//TODO: set opstick so it cannot go to positive again instead of set motor to 0.0 
+		}                                           
+//		if(Robot::claw->backLimitSwitch->Get() == true
+//				&& Robot::oi->getOpStick()->GetY() <= 0 )
+//                                                     
+//		{                                               
+//			Robot::claw->armMotor->Set(0.0);             
+//                                                        
+//		}                                                  
+	}                                                       
+	                                                         
+}                                                             
 // Make this return true when this Command no longer needs to run execute()
-bool RotateClaw::IsFinished() {
-	return false;
-}
-// Called once after isFinished returns true
-void RotateClaw::End() {
-	
-}
-// Called when another command which requires one or more of the same
+bool RotateClaw::IsFinished() {                                 
+	return false;                                                
+}                                                                 
+// Called once after isFinished returns true                       
+void RotateClaw::End() {                                                                                                       
+                                                                     	
+}                                                                     
+// Called when another command which requires one or more of the same   
 // subsystems is scheduled to run
 void RotateClaw::Interrupted() {
 }

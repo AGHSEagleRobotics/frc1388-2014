@@ -59,4 +59,9 @@ void Claw::InitDefaultCommand() {
 void Claw::GoToSavedPosition()
 {
 	UsePIDOutput(savePosition);
+	//TODO: Keep eye on
+}
+void Claw::Reset()
+{
+	GetPIDController()->Reset();
 }
