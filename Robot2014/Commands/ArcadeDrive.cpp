@@ -27,7 +27,7 @@ void ArcadeDrive::Execute() {
 	float yValue = Robot::oi->getRightYAxis();
 	float rValue = Robot::oi->getRightXAxis();
 	
-	Robot::driveTrain->myDriveTrain->ArcadeDrive(yValue, rValue, false);
+	Robot::driveTrain->myRobotDrive->ArcadeDrive(yValue, rValue, false);
 }
 // Make this return true when this Command no longer needs to run execute()
 bool ArcadeDrive::IsFinished() {

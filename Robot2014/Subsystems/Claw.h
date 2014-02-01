@@ -15,7 +15,6 @@
 #define POSITION_UP		0
 #define POSITION_SHOOT 	45
 #define POSITION_LOAD 	100
-
 // I need to make sure this is a motor speed and not a degree
 #define SMALL_MOVEMENT  1/50
 /**

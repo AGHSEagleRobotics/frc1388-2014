@@ -75,6 +75,8 @@ bool SpeedDrive::IsFinished() {
 // Called once after isFinished returns true
 void SpeedDrive::End()
 {
+	Robot::driveTrain->leftMotor->Set(0);
+	Robot::driveTrain->rightMotor->Set(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
