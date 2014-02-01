@@ -69,6 +69,5 @@ void Claw::Reset()
 }
 void Claw::SetSPLimit()
 {
-	
-	
+		
 }
