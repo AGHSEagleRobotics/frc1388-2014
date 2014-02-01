@@ -26,7 +26,7 @@ external_build ::
 	@echo ""
 
 # main entry point for pre processing prior to the build
-pre_build :: $(PRE_BUILD_STEP) generate_sources
+pre_build :: $(PRE_BUILD_STEP) generate_sources GitVersion.h
 	@echo ""
 
 # entry point for generating sources prior to the build
@@ -46,3 +46,20 @@ clean :: external_clean $(CLEAN_STEP) _clean
 # entry point for extending the build clean
 external_clean ::
 	@echo ""
+
+GIT_VERSION := $(shell git log -1 --pretty=format:%h)
+GIT_STATUS  := $(shell git status -z -uno)
+GIT_TAG := 
+ifneq (,$(GIT_STATUS))
+  GIT_VERSION := "$(GIT_VERSION)-mod"
+else
+  GIT_TAG := $(shell git tag --contains $(GIT_VERSION) | head -1)
+endif
+
+GitVersion.h:
+	@echo -E "Latest Commit checksum: $(GIT_VERSION)"
+	echo -E "const char* GIT_VERSION=\"$(GIT_VERSION)\";" > $(PRJ_ROOT_DIR)/GitVersion.h
+	echo -E "const char* GIT_TAG=\"$(GIT_TAG)\";" >> $(PRJ_ROOT_DIR)/GitVersion.h
+	echo -E "const char* BUILD_DATE=__DATE__;" >> $(PRJ_ROOT_DIR)/GitVersion.h
+	echo -E "const char* BUILD_TIME=__TIME__;" >> $(PRJ_ROOT_DIR)/GitVersion.h
+

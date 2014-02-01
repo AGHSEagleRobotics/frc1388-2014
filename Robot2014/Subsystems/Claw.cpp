@@ -33,6 +33,8 @@ Claw::Claw() : PIDSubsystem("Claw", 1.0, 0.0, 0.0) {
 	//Set the intial position to false so we can reset later
 	initializedPosition = false;
 	zeroSwitchInit = zeroSwitch->Get();
+	conversionConstant = 10.0;
+	
 }
 double Claw::ReturnPIDInput() {
 	// Return your input value for the PID loop
@@ -64,4 +66,9 @@ void Claw::GoToSavedPosition()
 void Claw::Reset()
 {
 	GetPIDController()->Reset();
+}
+void Claw::SetSPLimit()
+{
+	
+	
 }
