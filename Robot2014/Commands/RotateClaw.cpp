@@ -43,11 +43,9 @@ void RotateClaw::Execute() {
 			Robot::claw->armMotor->Set(
 					Robot::oi->getOpStick()->GetY());
 			Robot::claw->actualValue = Robot::claw->quadClawEncoder->Get();
-
 			Robot::claw->SetSetpoint(
 					Robot::claw->quadClawEncoder->Get() 
 					+ ((Robot::oi->getOpStick()->GetY()) * Robot::claw->conversionConstant));							
-
 			Robot::claw->SetSPLimit();
 				//TODO: verify code 
 	}                                                       
