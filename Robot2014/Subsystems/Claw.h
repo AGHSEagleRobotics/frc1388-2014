@@ -40,8 +40,6 @@ class Claw: public PIDSubsystem {
 	void SetSPLimit();
 	void Reset();
 	double savePosition;
-	float actualValue;
-	float conversionConstant;
 	bool initializedPosition;
 	bool zeroSwitchInit;
 	bool savedPositionExist;

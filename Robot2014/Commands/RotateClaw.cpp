@@ -9,6 +9,7 @@
 // it from being updated in th future.
 #include "RotateClaw.h"
 #include "../Subsystems/Claw.h"
+#define OPSTICK_CONVERSION_FACTOR 10
 RotateClaw::RotateClaw() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -18,16 +19,12 @@ RotateClaw::RotateClaw() {
 }
 // Called just before this Command runs the first time
 void RotateClaw::Initialize() {
+	Robot::claw->Enable();//enable PID Controller
 	}
 // Called repeatedly when this Command is scheduled to run
 void RotateClaw::Execute() {
 	if (Robot::claw->initializedPosition == false){	
 		//TODO: verify code
-		if (Robot::claw->zeroSwitch->Get() == true){
-			Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
-		}else{
-			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
-		}
 		if(Robot::claw->zeroSwitch->Get() != Robot::claw->zeroSwitchInit ){
 			//This code resets the pid controller and the claw encoder so they will function  
 			Robot::claw->Disable();//Disable PID Controller
@@ -35,20 +32,18 @@ void RotateClaw::Execute() {
 			Robot::claw->SetSetpoint(POSITION_UP);
 			Robot::claw->Reset();
 			Robot::claw->Enable();//enable PID Controller
-			
 			Robot::claw->initializedPosition = true;
 		}	
+		if (Robot::claw->zeroSwitch->Get() == true){
+			Robot::claw->SetSetpointRelative(SMALL_MOVEMENT);
+		}else{
+			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
+		}
 		//TODO: test code 
-		} else {	
-			Robot::claw->armMotor->Set(
-					Robot::oi->getOpStick()->GetY());
-			Robot::claw->actualValue = Robot::claw->quadClawEncoder->Get();
-
-			Robot::claw->SetSetpoint(
-					Robot::claw->quadClawEncoder->Get() 
-					+ ((Robot::oi->getOpStick()->GetY()) * Robot::claw->conversionConstant));							
-
-			Robot::claw->SetSPLimit();
+	} else {
+		Robot::claw->SetSetpoint(
+						Robot::claw->quadClawEncoder->Get() 
+						+ ((Robot::oi->getOpStick()->GetY()) * OPSTICK_CONVERSION_FACTOR));							
 				//TODO: verify code 
 	}                                                       
 	                                                         
