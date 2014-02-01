@@ -69,5 +69,13 @@ void Claw::Reset()
 }
 void Claw::SetSPLimit()
 {
-		
+	if (Robot::claw->frontLimitSwitch->Get() == true)
+	{
+		Robot::claw->SetInputRange(0,1);
+	}
+	
+	if (Robot::claw->backLimitSwitch->Get() == true)
+	{
+		Robot::claw->SetInputRange(0.0,1.0);
+	}
 }

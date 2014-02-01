@@ -41,28 +41,15 @@ void RotateClaw::Execute() {
 		//TODO: test code 
 		} else {	
 			Robot::claw->armMotor->Set(
-				Robot::oi->getOpStick()->GetY());
-		Robot::claw->actualValue = Robot::claw->quadClawEncoder->Get();
-	
-				Robot::claw->SetSetpoint(
-						Robot::claw->quadClawEncoder->Get() 
-						+ ((Robot::oi->getOpStick()->GetY()) * Robot::claw->conversionConstant));							
-		
-	
-				
-				
-				
-				if (Robot::claw->frontLimitSwitch->Get() == true && Robot::oi->getOpStick()->GetY()  >= 0 ){
-			
-			//TODO: set opstick so it cannot go to positive again instead of set motor to 0.0 
-		}                                           
-//		if(Robot::claw->backLimitSwitch->Get() == true
-//				&& Robot::oi->getOpStick()->GetY() <= 0 )
-//                                                     
-//		{                                               
-//			Robot::claw->armMotor->Set(0.0);             
-//                                                        
-//		}                                                  
+					Robot::oi->getOpStick()->GetY());
+			Robot::claw->actualValue = Robot::claw->quadClawEncoder->Get();
+
+			Robot::claw->SetSetpoint(
+					Robot::claw->quadClawEncoder->Get() 
+					+ ((Robot::oi->getOpStick()->GetY()) * Robot::claw->conversionConstant));							
+
+			Robot::claw->SetSPLimit();
+				//TODO: verify code 
 	}                                                       
 	                                                         
 }                                                             
