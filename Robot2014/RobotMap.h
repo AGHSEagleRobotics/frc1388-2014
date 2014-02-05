@@ -23,7 +23,6 @@ public:
 	static SpeedController* clawArmMotor;
 	static DigitalInput* clawFrontLimitSwitch;
 	static DigitalInput* clawBackLimitSwitch;
-	static DigitalInput* clawZeroSwitch;
 	static Encoder* driveTrainRightEncoder;
 	static Encoder* driveTrainLeftEncoder;
 	static SpeedController* driveTrainLeftMotor;
