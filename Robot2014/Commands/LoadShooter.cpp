@@ -17,19 +17,28 @@ LoadShooter::LoadShooter() {
 }
 // Called just before this Command runs the first time
 void LoadShooter::Initialize() {
+	printf("Loading the Shooter! \r\n");
 	loadingTimer.Reset();
 	
 	isTimerRunning = false;
 	
-	if(Robot::shooter->latchingLimitSwitch == false)
+	if(Robot::shooter->latchingLimitSwitch->Get() == false)
 	{
-		Robot::shooter->loadingMotor->Set(-0.3);
+//		TODO: Check the sign of the value being set
+		Robot::shooter->loadingMotor->Set(0.3);
 	}
 }
 // Called repeatedly when this Command is scheduled to run
 void LoadShooter::Execute() {
 	
-	if(Robot::shooter->latchingLimitSwitch && !isTimerRunning)
+	printf("Motor Power: %f Time: %f \r\n", Robot::shooter->loadingMotor->Get(), loadingTimer.Get());
+	
+	if(Robot::shooter->latchingLimitSwitch->Get() == true)
+	{
+		printf("Limit Switch True! \r\n");
+	}
+	
+	if(Robot::shooter->latchingLimitSwitch->Get() && isTimerRunning == false)
 	{
 		loadingTimer.Start();
 		isTimerRunning = true;

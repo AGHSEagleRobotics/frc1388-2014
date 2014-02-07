@@ -31,6 +31,7 @@ CockShooterGroup::CockShooterGroup() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+	printf("Cocking the Shooter! \r\n");
 	AddSequential(new LoadShooter());
 	AddSequential(new CockShooter());
 }

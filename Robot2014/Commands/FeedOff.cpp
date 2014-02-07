@@ -18,14 +18,13 @@ FeedOff::FeedOff() {
 void FeedOff::Initialize() {
 //	Turns the feeder off
 	Robot::feeder->feedMotor->Set(0);
-	printf("Done Feeding! \r\n");
 }
 // Called repeatedly when this Command is scheduled to run
 void FeedOff::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool FeedOff::IsFinished() {
-	return false;
+	return true;
 }
 // Called once after isFinished returns true
 void FeedOff::End() {
