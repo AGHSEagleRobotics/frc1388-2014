@@ -10,6 +10,7 @@
 #ifndef _ROBOT_H
 #define _ROBOT_H
 #include "WPILib.h"
+#include "InsightLT/InsightLT.h"
 #include "Commands/Command.h"
 #include "RobotMap.h"
 #include "LiveWindow/LiveWindow.h"
@@ -23,6 +24,8 @@
 #include "OI.h"
 class Robot : public IterativeRobot {
 public:
+	
+	Robot();
 	Command *autonomousCommand;
 	static OI *oi;
 	LiveWindow *lw;
@@ -40,5 +43,15 @@ public:
 	virtual void TestPeriodic();
 	static float SignOf(float number);
 	static float JoystickDeadband(float value);
+	
+private:
+	void GlobalInit();
+	void GlobalPeriodic();
+	Timer initTimer;
+	float battVoltage;
+    insight::InsightLT display;
+    insight::StringData disp_GitVersion;
+    insight::StringData disp_BuildDate;
+    insight::StringData disp_BattVoltage;	
 };
 #endif
