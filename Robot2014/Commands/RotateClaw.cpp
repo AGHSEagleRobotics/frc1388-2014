@@ -9,7 +9,10 @@
 // it from being updated in th future.
 #include "RotateClaw.h"
 #include "../Subsystems/Claw.h"
+#include <math.h>
+
 #define OPSTICK_CONVERSION_FACTOR 10
+
 RotateClaw::RotateClaw() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -25,7 +28,7 @@ void RotateClaw::Initialize() {
 void RotateClaw::Execute() {
 	if (Robot::claw->initializedPosition == false){	
 		//TODO: verify code
-		if(Robot::claw->backLimitSwitch->Get() != Robot::claw->backSwitchInit ){
+		if(Robot::claw->backLimitSwitch->Get() == true){
 			//This code resets the pid controller and the claw encoder so they will function  
 			Robot::claw->Disable();//Disable PID Controller
 			Robot::claw->quadClawEncoder->Reset();
@@ -34,18 +37,17 @@ void RotateClaw::Execute() {
 			Robot::claw->Enable();//enable PID Controller
 			Robot::claw->initializedPosition = true;
 		}	
-		while(Robot::claw->backLimitSwitch->Get() == false){
+		if (Robot::claw->backLimitSwitch->Get() == false){
 			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
 		}
 	} else {
 		//absolute value
-		if (Robot::oi->getOpStick()->GetY() > 0.1)
+		if (fabs(Robot::oi->getOpStick()->GetY()) > 0.1)
 		{
-			Robot::claw->SetSetpoint(Robot::claw->quadClawEncoder->Get());
+			Robot::claw->SetSetpoint(
+					Robot::claw->quadClawEncoder->GetDistance() 
+					+ ((Robot::oi->getOpStick()->GetY()) * OPSTICK_CONVERSION_FACTOR));
 		}
-		Robot::claw->SetSetpoint(
-				Robot::claw->quadClawEncoder->Get() 
-				+ ((Robot::oi->getOpStick()->GetY()) * OPSTICK_CONVERSION_FACTOR));
 	}                                                       
 }                                                             
 // Make this return true when this Command no longer needs to run execute()
