@@ -14,7 +14,6 @@ Encoder* RobotMap::clawQuadClawEncoder = NULL;
 SpeedController* RobotMap::clawArmMotor = NULL;
 DigitalInput* RobotMap::clawFrontLimitSwitch = NULL;
 DigitalInput* RobotMap::clawBackLimitSwitch = NULL;
-DigitalInput* RobotMap::clawZeroSwitch = NULL;
 Encoder* RobotMap::driveTrainRightEncoder = NULL;
 Encoder* RobotMap::driveTrainLeftEncoder = NULL;
 SpeedController* RobotMap::driveTrainLeftMotor = NULL;
@@ -42,9 +41,6 @@ void RobotMap::init() {
 	
 	clawBackLimitSwitch = new DigitalInput(1, 10);
 	lw->AddSensor("Claw", "BackLimitSwitch", clawBackLimitSwitch);
-	
-	clawZeroSwitch = new DigitalInput(1, 5);
-	lw->AddSensor("Claw", "ZeroSwitch", clawZeroSwitch);
 	
 	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "RightEncoder", driveTrainRightEncoder);
