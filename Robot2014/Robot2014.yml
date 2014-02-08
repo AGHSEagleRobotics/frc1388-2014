@@ -111,6 +111,22 @@ Children:
           name: Input Module (Digital)
           validators: *id004
           value: '1'
+    - Name: ZeroSwitch
+      Base: Limit Switch
+      Children: []
+      Properties:
+        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '1'
+          name: Input Channel (Digital)
+          validators: *id002
+          value: '5'
+        Input Module (Digital): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id003
+          default: '1'
+          name: Input Module (Digital)
+          validators: *id004
+          value: '1'
     Properties:
       D: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: D, validators: null,
         value: 0.0}
@@ -1044,6 +1060,6 @@ Properties:
     validators: null, value: 1388}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
-  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle\NetBeansProjects',
+  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Jarrett\NetBeansProjects',
     extension: null, folder: true, name: Java Project Directory, validators: null,
     value: 'C:\Users\Jarrett\NetBeansProjects'}

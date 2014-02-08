@@ -19,25 +19,29 @@ SpeedDrive::SpeedDrive() {
 // Called just before this Command runs the first time
 void SpeedDrive::Initialize()
 {
+	
 }
 // Called repeatedly when this Command is scheduled to run
 void SpeedDrive::Execute()
 {
 	float leftStick = Robot::oi->getLeftYAxis();
-	float rightStick = -(Robot::oi->getRightYAxis());	
-	float rawLeftCount = (float) Robot::driveTrain->leftEncoder->Get();
-	float rawRightCount = (float) Robot::driveTrain->rightEncoder->Get();
+	float rightStick = -(Robot::oi->getRightYAxis());
 	
-	printf("Raw Left Encoder: %f, Raw Right Encoder: %f \r\n", rawLeftCount, rawRightCount);
+	float rawLeftRate = (float) Robot::driveTrain->leftEncoder->GetRate();
+	float rawRightRate = (float) Robot::driveTrain->rightEncoder->GetRate();
 	
-	// 500 represents the counts for full speed
-	float scaledLeftCount = (rawLeftCount / 16.0);
-	float scaledRightCount = (rawRightCount / 16.0);
+	printf("Raw Left Rate: %f, Raw Right Rate: %f \r\n", rawLeftRate, rawRightRate);
+	
+	// 16 represents the counts for full speed
+	float scaledLeftRate = (rawLeftRate / 16.0);
+	float scaledRightRate = (rawRightRate / 16.0);
 	
 	// 0.0280499 is the feet per counts on Pheonix
 	
-	// limits the range of the error
-	float leftError = leftStick - (scaledLeftCount * Robot::SignOf(leftStick));
+
+	float leftError = leftStick - (scaledLeftRate * Robot::SignOf(leftStick));
+	
+	// limits the range of the leftError	
 	if(leftError > 0.5)
 	{
 		leftError = 0.5;
@@ -47,7 +51,9 @@ void SpeedDrive::Execute()
 		leftError = -0.5;
 	}
 	
-	float rightError = rightStick - (scaledRightCount * Robot::SignOf(rightStick));
+	float rightError = rightStick - (scaledRightRate * Robot::SignOf(rightStick));
+	
+	// limits the range of rightError
 	if(rightError > 0.5)
 	{
 		rightError = 0.5;
@@ -62,6 +68,7 @@ void SpeedDrive::Execute()
 	
 	printf("Left Motor Power: %f, Right Motor Power: %f \r\n", Robot::driveTrain->leftMotor->Get(),
 			Robot::driveTrain->rightMotor->Get());
+	
 	if(fabs(leftStick) < 0.05 || fabs(rightStick) < 0.05)
 	{
 		Robot::driveTrain->leftEncoder->Reset();

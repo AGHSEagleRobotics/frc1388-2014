@@ -40,6 +40,8 @@ public:
 	virtual void AutonomousPeriodic();
 	virtual void TeleopInit();
 	virtual void TeleopPeriodic();
+	virtual void DisabledInit();
+	virtual void DisabledPeriodic();
 	virtual void TestPeriodic();
 	static float SignOf(float number);
 	static float JoystickDeadband(float value);
@@ -52,6 +54,6 @@ private:
     insight::InsightLT display;
     insight::StringData disp_GitVersion;
     insight::StringData disp_BuildDate;
-    insight::StringData disp_BattVoltage;	
+    insight::DecimalData disp_BattVoltage;	
 };
 #endif
