@@ -24,9 +24,10 @@ AutonomousGroup::AutonomousGroup() {
 	//TODO: we need to verify the shooting sequence
 	//TODO: need to find out the time parameters for the wait and drive forward commands
 	//TODO: find out how long it takes to get the claw to the zero position
-	AddSequential(new CockShooterGroup());
+	AddParallel(new CockShooterGroup());
 	AddSequential(new GoToShoot());
 	AddSequential(new DriveForward(1,1));
+	AddSequential(new WaitCommand(1));
 	AddSequential(new Shoot());
 	
 
