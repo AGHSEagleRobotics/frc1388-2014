@@ -67,17 +67,25 @@ void Claw::Reset()
 }
 void Claw::CheckLimits()
 {
-	
-	if(Robot::claw->frontLimitSwitch->Get() == true)
+	//this command utilizes SetOutputRange to limit the motor based on limit switches 
+	if(frontLimitSwitch->Get() == true)
 	{
-		Robot::claw->SetInputRange(CLAW_MIN_POWER,0.0);
+		// if front limit switch is hit this limits the motor from running forward
+		SetOutputRange(CLAW_MIN_POWER,0.0);
 	}
-	else if(Robot::claw->backLimitSwitch->Get() == true)
+	else if(backLimitSwitch->Get() == true)
 	{
-		Robot::claw->SetInputRange(0.0, CLAW_MAX_POWER);
+		// if backlimitswitch is hit this limit the motor from running backwards
+		SetOutputRange(0.0, CLAW_MAX_POWER);
 	}
 	else 
 	{
-		Robot::claw->SetInputRange(CLAW_MIN_POWER, CLAW_MAX_POWER);
+		//if neither switch is hit this allows full movement of arm
+		SetOutputRange(CLAW_MIN_POWER, CLAW_MAX_POWER);
 	} 
 }
+void Claw::SetOutputRange(float min, float max)
+{
+	GetPIDController()->SetOutputRange(min , max);
+}
+
