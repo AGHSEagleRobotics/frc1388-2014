@@ -21,6 +21,7 @@
 #define CLAW_RANGE_MAX 		100
 #define CLAW_MAX_POWER 		0.25
 #define CLAW_MIN_POWER		-0.25
+
 /**
  *
  *
