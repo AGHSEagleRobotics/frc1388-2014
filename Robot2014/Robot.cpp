@@ -108,18 +108,6 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	if (autonomousCommand != NULL)
 		Scheduler::GetInstance()->Run();
-	
-	GlobalPeriodic();
-	//TODO: add code to global periodic as soon as Jarrett creates Global Periodic
-	if(Robot::claw->frontLimitSwitch->Get() == true)
-	{
-		Robot::claw->SetInputRange(0.0,-1.0);
-	}
-	if(Robot::claw->backLimitSwitch->Get() == true)
-	{
-		Robot::claw->SetInputRange(0.0, 1.0);
-	}
-	//in here place code that checks the limit switch and if the switch is true/false 
 }
 void Robot::TestPeriodic() {
 	GlobalPeriodic();

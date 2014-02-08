@@ -9,8 +9,8 @@
 // it from being updated in th future.
 
 
-#ifndef SETPOSITION_H
-#define SETPOSITION_H
+#ifndef DRIVEFORWARD_H
+#define DRIVEFORWARD_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,17 +21,17 @@
  *
  * @author ExampleAuthor
  */
-class SetPosition: public Command {
+class DriveForward: public Command {
 public:
-	SetPosition(int);
+	DriveForward(float power, float time);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
-	
 private:
-	int position;
+	float m_power;
+	float m_time;
 };
 
 #endif
