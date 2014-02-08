@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 
-
 #include "DriveForward.h"
 
 DriveForward::DriveForward(float power, float time = 1) {
