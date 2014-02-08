@@ -12,7 +12,6 @@
 
 #ifndef AUTONOMOUSGROUP_H
 #define AUTONOMOUSGROUP_H
-
 #include "Commands/CommandGroup.h"
 
 /**

@@ -107,6 +107,9 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	if (autonomousCommand != NULL)
 		Scheduler::GetInstance()->Run();
+	
+	//this code makes the robot run checklimits whenever the robot is on
+	claw->CheckLimits();
 }
 void Robot::TestPeriodic() {
 	GlobalPeriodic();

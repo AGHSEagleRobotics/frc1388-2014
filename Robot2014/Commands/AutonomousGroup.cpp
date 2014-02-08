@@ -11,12 +11,25 @@
 
 
 #include "AutonomousGroup.h"
-
+#include "GoToShoot.h"
+#include "DriveForward.h"
+#include "Shoot.h"
+#include "CockShooterGroup.h"
 AutonomousGroup::AutonomousGroup() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
 	// these will run in order.
+	//We found out that you must add the parameters to get the sequential to work
+	//TODO: we need to verify the shooting sequence
+	//TODO: need to find out the time parameters for the wait and drive forward commands
+	//TODO: find out how long it takes to get the claw to the zero position
+	AddParallel(new CockShooterGroup());
+	AddSequential(new GoToShoot());
+	AddSequential(new DriveForward(1,1));
+	AddSequential(new WaitCommand(1));
+	AddSequential(new Shoot());
+	
 
 	// To run multiple commands at the same time,
 	// use AddParallel()

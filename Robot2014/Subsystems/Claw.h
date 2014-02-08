@@ -19,8 +19,8 @@
 #define SMALL_MOVEMENT  	.04
 #define CLAW_RANGE_MIN 		-45
 #define CLAW_RANGE_MAX 		100
-#define CLAW_MAX_POWER 		0.5
-#define CLAW_MIN_POWER		-0.5
+#define CLAW_MAX_POWER 		0.25
+#define CLAW_MIN_POWER		-0.25
 /**
  *
  *
@@ -43,6 +43,7 @@ class Claw: public PIDSubsystem {
 	void GoToResetPosition();
 	void Reset();
 	void CheckLimits ();
+	void SetOutputRange(float min, float max);
 	double savePosition;
 	bool initializedPosition;
 	bool backSwitchInit;

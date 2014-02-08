@@ -36,10 +36,13 @@ void RotateClaw::Execute() {
 			Robot::claw->initializedPosition = true;
 		}	
 		if (Robot::claw->backLimitSwitch->Get() == false){
+			//this code makes the arm go to the zero position if the backlimitswitch is false
 			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
+			
 		}
 	} else {
-		//absolute value
+		//this command take the absolute value of the joystick value
+		//and if that value is of substantial value then use direct drive
 		if (fabs(Robot::oi->getOpStick()->GetY()) > 0.1)
 		{
 			Robot::claw->SetSetpoint(
