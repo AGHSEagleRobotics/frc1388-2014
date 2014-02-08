@@ -18,6 +18,7 @@ LoadShooter::LoadShooter() {
 // Called just before this Command runs the first time
 void LoadShooter::Initialize() {
 	printf("Loading the Shooter! \r\n");
+	
 	loadingTimer.Reset();
 	
 	isTimerRunning = false;
@@ -32,16 +33,12 @@ void LoadShooter::Initialize() {
 void LoadShooter::Execute() {
 	
 	printf("Motor Power: %f Time: %f \r\n", Robot::shooter->loadingMotor->Get(), loadingTimer.Get());
-	
-	if(Robot::shooter->latchingLimitSwitch->Get() == true)
-	{
-		printf("Limit Switch True! \r\n");
-	}
-	
-	if(Robot::shooter->latchingLimitSwitch->Get() && isTimerRunning == false)
+		
+	if(Robot::shooter->latchingLimitSwitch->Get() && !(isTimerRunning))
 	{
 		loadingTimer.Start();
 		isTimerRunning = true;
+//		TODO: Check if kOff is the right call
 		Robot::shooter->latch->Set(Relay::kOff);
 		Robot::shooter->loadingMotor->Set(0);
 	}

@@ -38,7 +38,6 @@ void SpeedDrive::Execute()
 	
 	// 0.0280499 is the feet per counts on Pheonix
 	
-
 	float leftError = leftStick - (scaledLeftRate * Robot::SignOf(leftStick));
 	
 	// limits the range of the leftError	
@@ -63,17 +62,19 @@ void SpeedDrive::Execute()
 		rightError = -0.5;
 	}
 	
-	Robot::driveTrain->leftMotor->Set(leftError);
-	Robot::driveTrain->rightMotor->Set(rightError);
+	Robot::driveTrain->myRobotDrive->TankDrive(leftError, rightError, false);
+	
+//	Robot::driveTrain->leftMotor->Set(leftError);
+//	Robot::driveTrain->rightMotor->Set(rightError);
 	
 	printf("Left Motor Power: %f, Right Motor Power: %f \r\n", Robot::driveTrain->leftMotor->Get(),
 			Robot::driveTrain->rightMotor->Get());
 	
-	if(fabs(leftStick) < 0.05 || fabs(rightStick) < 0.05)
-	{
-		Robot::driveTrain->leftEncoder->Reset();
-		Robot::driveTrain->rightEncoder->Reset();
-	}
+//	if(fabs(leftStick) < 0.05 || fabs(rightStick) < 0.05)
+//	{
+//		Robot::driveTrain->leftEncoder->Reset();
+//		Robot::driveTrain->rightEncoder->Reset();
+//	}
 }
 // Make this return true when this Command no longer needs to run execute()
 bool SpeedDrive::IsFinished() {
@@ -82,8 +83,10 @@ bool SpeedDrive::IsFinished() {
 // Called once after isFinished returns true
 void SpeedDrive::End()
 {
-	Robot::driveTrain->leftMotor->Set(0);
-	Robot::driveTrain->rightMotor->Set(0);
+	Robot::driveTrain->myRobotDrive->TankDrive(0.0, 0.0, false);
+	
+//	Robot::driveTrain->leftMotor->Set(0);
+//	Robot::driveTrain->rightMotor->Set(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

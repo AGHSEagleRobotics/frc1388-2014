@@ -8,11 +8,14 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 
-#include "CockShooterGroup.h"
-#include "CockShooter.h"
-#include "LoadShooter.h"
 
-CockShooterGroup::CockShooterGroup() {
+
+#include "ShootAndCock.h"
+#include "Shoot.h"
+#include "LoadShooter.h"
+#include "CockShooter.h"
+
+ShootAndCock::ShootAndCock() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -29,7 +32,9 @@ CockShooterGroup::CockShooterGroup() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	printf("Cocking the Shooter! \r\n");
+	
+	AddSequential(new Shoot());
+	AddSequential(new WaitCommand(5));
 	AddSequential(new LoadShooter());
 	AddSequential(new CockShooter());
 }

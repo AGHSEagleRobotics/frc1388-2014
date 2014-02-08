@@ -10,9 +10,7 @@
 #include "RotateClaw.h"
 #include "../Subsystems/Claw.h"
 #include <math.h>
-
 #define OPSTICK_CONVERSION_FACTOR 10
-
 RotateClaw::RotateClaw() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);

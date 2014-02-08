@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "AddedPowerDrive.h"
+#define STICKTION_BREAK_FACTOR 0.25
 AddedPowerDrive::AddedPowerDrive() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -36,14 +37,18 @@ void AddedPowerDrive::Execute() {
 	if((leftEncoderRate < 1 || rightEncoderRate < 1) && (leftPower > 0.1 || rightPower > 0.1))
 	{
 //		0.25 is still subject to change
-		Robot::driveTrain->leftMotor->Set(leftPower + (Robot::SignOf(leftPower) * 0.25));
-		Robot::driveTrain->rightMotor->Set(rightPower + (Robot::SignOf(rightPower) * 0.25));
+		float addedLeftPower = leftPower + (Robot::SignOf(leftPower) * STICKTION_BREAK_FACTOR);
+		float addedRightPower = rightPower + (Robot::SignOf(rightPower) * STICKTION_BREAK_FACTOR);
+		
+		Robot::driveTrain->myRobotDrive->TankDrive(addedLeftPower, addedRightPower, false);
 		
 	}
 	else
 	{
-		Robot::driveTrain->leftMotor->Set(leftPower);
-		Robot::driveTrain->rightMotor->Set(rightPower);
+		Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, false);
+		
+//		Robot::driveTrain->leftMotor->Set(leftPower);
+//		Robot::driveTrain->rightMotor->Set(rightPower);
 	}
 }
 // Make this return true when this Command no longer needs to run execute()

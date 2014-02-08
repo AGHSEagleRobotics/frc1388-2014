@@ -35,7 +35,6 @@ void Robot::GlobalInit()
 	disp_GitVersion.setData(GIT_VERSION);
 	disp_BuildDate.setData(BUILD_DATE);
 }
-
 void Robot::GlobalPeriodic()
 {
 	battVoltage = DriverStation::GetInstance()->GetBatteryVoltage();
@@ -113,12 +112,10 @@ void Robot::TestPeriodic() {
 	GlobalPeriodic();
 	lw->Run();
 }
-
 void Robot::DisabledInit()
 {
 	
 }
-
 void Robot::DisabledPeriodic()
 {
 	GlobalPeriodic();
