@@ -20,6 +20,8 @@
 #include "Commands/FeedIn.h"
 #include "Commands/FeedOff.h"
 #include "Commands/FeedOut.h"
+#include "Commands/GoToLoad.h"
+#include "Commands/GoToShoot.h"
 #include "Commands/GoToUp.h"
 #include "Commands/HalfCockShooter.h"
 #include "Commands/LoadShooter.h"
@@ -51,10 +53,10 @@ OI::OI() {
 	halfCock->WhenPressed(new HalfCockShooter());
 	buttonPos4 = new JoystickButton(opStick, 5);
 	buttonPos4->WhileHeld(new RestorePosition());
-	buttonPos3 = new JoystickButton(opStick, 4);
-	buttonPos3->WhileHeld(new RestorePosition());
-	buttonPos2 = new JoystickButton(opStick, 3);
-	buttonPos2->WhileHeld(new RestorePosition());
+	buttonLoad = new JoystickButton(opStick, 4);
+	buttonLoad->WhileHeld(new GoToLoad());
+	buttonShoot = new JoystickButton(opStick, 3);
+	buttonShoot->WhileHeld(new GoToShoot());
 	buttonUp = new JoystickButton(opStick, 3);
 	buttonUp->WhileHeld(new GoToUp());
 	pickUpButton = new JoystickButton(opStick, 2);
@@ -89,6 +91,8 @@ OI::OI() {
 	SmartDashboard::PutData("PickUp", new PickUp());
 	SmartDashboard::PutData("Shoot", new Shoot());
 	SmartDashboard::PutData("GoToUp", new GoToUp());
+	SmartDashboard::PutData("GoToLoad", new GoToLoad());
+	SmartDashboard::PutData("GoToShoot", new GoToShoot());
 	SmartDashboard::PutData("AddedPowerDrive", new AddedPowerDrive());
 	SmartDashboard::PutData("ArcadeDrive", new ArcadeDrive());
 	SmartDashboard::PutData("LoadShooter", new LoadShooter());
