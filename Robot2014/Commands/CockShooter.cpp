@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "CockShooter.h"
-
 #define isCocked Robot::shooter->cockedLimitSwitch->Get()
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies

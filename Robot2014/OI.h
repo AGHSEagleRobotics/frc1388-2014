@@ -20,8 +20,8 @@ private:
 	JoystickButton* feedOutNow;
 	JoystickButton* halfCock;
 	JoystickButton* buttonPos4;
-	JoystickButton* buttonPos3;
-	JoystickButton* buttonPos2;
+	JoystickButton* buttonLoad;
+	JoystickButton* buttonShoot;
 	JoystickButton* buttonUp;
 	JoystickButton* pickUpButton;
 	JoystickButton* saveButton;

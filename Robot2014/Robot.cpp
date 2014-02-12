@@ -110,6 +110,7 @@ void Robot::TeleopPeriodic() {
 	
 	//this code makes the robot run checklimits whenever the robot is on
 	claw->CheckLimits();
+	SmartDashboard::PutBoolean("backLimitSwitch",Robot::claw->backLimitSwitch);
 }
 void Robot::TestPeriodic() {
 	GlobalPeriodic();
