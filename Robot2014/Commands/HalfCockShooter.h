@@ -31,7 +31,7 @@ public:
 	virtual void Interrupted();
 	
 private:
-	Timer* shooterTimer;
+	Timer shooterTimer;
 	float loadTime;
 };
 

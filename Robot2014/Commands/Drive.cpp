@@ -25,10 +25,8 @@ void Drive::Execute() {
 	float leftPower = Robot::JoystickDeadband(Robot::oi->getLeftYAxis());
 	float rightPower = Robot::JoystickDeadband(Robot::oi->getRightYAxis());
 	
-	Robot::driveTrain->myRobotDrive->TankDrive(leftPower, -(rightPower), false);
+	Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, false);
 	
-//	Robot::driveTrain->leftMotor->Set(leftPower);
-//	Robot::driveTrain->rightMotor->Set(-(rightPower));
 }
 // Make this return true when this Command no longer needs to run execute()
 bool Drive::IsFinished() {
@@ -36,10 +34,7 @@ bool Drive::IsFinished() {
 }
 // Called once after isFinished returns true
 void Drive::End() {
-	float leftPower = 0;
-	float rightPower = 0;
-	
-	Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, false);
+	Robot::driveTrain->myRobotDrive->TankDrive(0.0, 0.0, false);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
