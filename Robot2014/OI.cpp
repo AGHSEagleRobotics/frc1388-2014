@@ -12,6 +12,7 @@
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/AddedPowerDrive.h"
 #include "Commands/ArcadeDrive.h"
+#include "Commands/AutonDrive.h"
 #include "Commands/AutonomousCommand.h"
 #include "Commands/CockShooter.h"
 #include "Commands/CockShooterGroup.h"
