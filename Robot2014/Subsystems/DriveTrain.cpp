@@ -40,5 +40,4 @@ void DriveTrain::AutonomousDrive(float setpoint){
 	float leftPower = (setpoint - leftPosition)*0.33;
 	float rightPower = (setpoint - rightPosition)*0.33;
 	myRobotDrive->TankDrive(leftPower, rightPower, false);
-
 }

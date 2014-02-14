@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "AutonomousCommand.h"
+#include "AutonomousGroup.h"
 AutonomousCommand::AutonomousCommand() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -16,7 +17,7 @@ AutonomousCommand::AutonomousCommand() {
 }
 // Called just before this Command runs the first time
 void AutonomousCommand::Initialize() {
-	
+	(new AutonomousGroup())->Start();
 }
 // Called repeatedly when this Command is scheduled to run
 void AutonomousCommand::Execute() {
