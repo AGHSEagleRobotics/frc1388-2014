@@ -25,7 +25,6 @@
 #include "Commands/GoToUp.h"
 #include "Commands/HalfCockShooter.h"
 #include "Commands/LoadShooter.h"
-#include "Commands/PickUp.h"
 #include "Commands/PositionDrive.h"
 #include "Commands/RestorePosition.h"
 #include "Commands/RotateClaw.h"
@@ -50,17 +49,15 @@ OI::OI() {
 	feedOutNow->WhileHeld(new FeedOut());
 	halfCock = new JoystickButton(opStick, 2);
 	halfCock->WhenPressed(new HalfCockShooter());
-	buttonPos4 = new JoystickButton(opStick, 5);
-	buttonPos4->WhileHeld(new RestorePosition());
-	buttonLoad = new JoystickButton(opStick, 4);
+	buttonRestore = new JoystickButton(opStick, 9);
+	buttonRestore->WhileHeld(new RestorePosition());
+	buttonLoad = new JoystickButton(opStick, 10);
 	buttonLoad->WhileHeld(new GoToLoad());
-	buttonShoot = new JoystickButton(opStick, 3);
+	buttonShoot = new JoystickButton(opStick, 7);
 	buttonShoot->WhileHeld(new GoToShoot());
-	buttonUp = new JoystickButton(opStick, 3);
+	buttonUp = new JoystickButton(opStick, 6);
 	buttonUp->WhileHeld(new GoToUp());
-	pickUpButton = new JoystickButton(opStick, 2);
-	pickUpButton->WhenPressed(new PickUp());
-	saveButton = new JoystickButton(opStick, 1);
+	saveButton = new JoystickButton(opStick, 8);
 	saveButton->WhenPressed(new SavePosition());
 	rightDriverStick = new Joystick(2);
 	
@@ -87,7 +84,6 @@ OI::OI() {
 	SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());
 	SmartDashboard::PutData("SavePosition", new SavePosition());
 	SmartDashboard::PutData("RestorePosition", new RestorePosition());
-	SmartDashboard::PutData("PickUp", new PickUp());
 	SmartDashboard::PutData("Shoot", new Shoot());
 	SmartDashboard::PutData("GoToUp", new GoToUp());
 	SmartDashboard::PutData("GoToLoad", new GoToLoad());
@@ -129,4 +125,8 @@ float OI::getRightZAxis()
 float OI::getLeftYAxis()
 {
 	return Robot::JoystickDeadband(leftDriverStick->GetAxis(Joystick::kYAxis));
+}
+float OI::getOpYAxis()
+{
+	return Robot::JoystickDeadband(opStick->GetAxis(Joystick::kYAxis));
 }

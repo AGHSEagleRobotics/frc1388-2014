@@ -30,16 +30,16 @@ void RobotMap::init() {
 	LiveWindow* lw = LiveWindow::GetInstance();
 	clawQuadClawEncoder = new Encoder(1, 7, 1, 8, false, Encoder::k1X);
 	lw->AddSensor("Claw", "QuadClawEncoder", clawQuadClawEncoder);
-	clawQuadClawEncoder->SetDistancePerPulse(1.0);
+	clawQuadClawEncoder->SetDistancePerPulse(0.05);
         clawQuadClawEncoder->SetPIDSourceParameter(Encoder::kDistance);
         clawQuadClawEncoder->Start();
 	clawArmMotor = new Talon(1, 8);
 	lw->AddActuator("Claw", "ArmMotor", (Talon*) clawArmMotor);
 	
-	clawFrontLimitSwitch = new DigitalInput(1, 9);
+	clawFrontLimitSwitch = new DigitalInput(1, 10);
 	lw->AddSensor("Claw", "FrontLimitSwitch", clawFrontLimitSwitch);
 	
-	clawBackLimitSwitch = new DigitalInput(1, 10);
+	clawBackLimitSwitch = new DigitalInput(1, 9);
 	lw->AddSensor("Claw", "BackLimitSwitch", clawBackLimitSwitch);
 	
 	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, false, Encoder::k4X);

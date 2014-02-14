@@ -24,9 +24,12 @@ void RotateClaw::Initialize() {
 	}
 // Called repeatedly when this Command is scheduled to run
 void RotateClaw::Execute() {
+	Robot::claw->mysetpoint = Robot::claw->GetSetpoint();
+	Robot::claw->myencoder = Robot::claw->quadClawEncoder->GetDistance();
+	printf("setpoint=%0.06f  encoder=%0.06f init=%d limit=%d\n", Robot::claw->mysetpoint, Robot::claw->myencoder, 
+			Robot::claw->initializedPosition, Robot::claw->backLimitSwitch->Get());
 	if (Robot::claw->initializedPosition == false){	
-		//TODO: verify code
-		if(Robot::claw->backLimitSwitch->Get() == true){
+			if(Robot::claw->backLimitSwitch->Get() == true){
 			//This code resets the pid controller and the claw encoder so they will function  
 			Robot::claw->Disable();//Disable PID Controller
 			Robot::claw->quadClawEncoder->Reset();
@@ -38,18 +41,24 @@ void RotateClaw::Execute() {
 		if (Robot::claw->backLimitSwitch->Get() == false){
 			//this code makes the arm go to the zero position if the backlimitswitch is false
 			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
-			
+			printf("smallmovement");
+					
 		}
 	} else {
-		//this command take the absolute value of the joystick value
+				//this command take the absolute value of the joystick value
 		//and if that value is of substantial value then use direct drive
 		if (fabs(Robot::oi->getOpStick()->GetY()) > 0.1)
 		{
+			printf("rotating");
+			printf("rotating \n");
 			Robot::claw->SetSetpoint(
 					Robot::claw->quadClawEncoder->GetDistance() 
 					+ ((Robot::oi->getOpStick()->GetY()) * OPSTICK_CONVERSION_FACTOR));
 		}
-	}                                                       
+		printf("Setpoint: %f \n", Robot::claw->GetSetpoint());
+	
+	
+	}
 }                                                             
 // Make this return true when this Command no longer needs to run execute()
 bool RotateClaw::IsFinished() {                                 

@@ -18,11 +18,7 @@ RestorePosition::RestorePosition() {
 }
 // Called just before this Command runs the first time
 void RestorePosition::Initialize() {		
-	//TODO: Review this code
-	if (Robot::claw->savedPositionExist == true)
-	{
 	Robot::claw->GoToSavedPosition();
-	}
 }
 // Called repeatedly when this Command is scheduled to run
 void RestorePosition::Execute() {

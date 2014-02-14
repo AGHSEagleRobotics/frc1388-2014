@@ -30,6 +30,7 @@ AutonomousGroup::AutonomousGroup() {
 	AddSequential(new WaitCommand(1));
 	AddSequential(new Shoot());
 	
+	printf("autonomous group");
 
 	// To run multiple commands at the same time,
 	// use AddParallel()

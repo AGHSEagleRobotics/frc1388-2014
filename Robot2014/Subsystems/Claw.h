@@ -16,7 +16,7 @@
 #define POSITION_SHOOT 		45
 #define POSITION_LOAD 		100
 // I need to make sure this is a motor speed and not a degree
-#define SMALL_MOVEMENT  	.04
+#define SMALL_MOVEMENT  	.1
 #define CLAW_RANGE_MIN 		-45
 #define CLAW_RANGE_MAX 		100
 #define CLAW_MAX_POWER 		0.25
@@ -47,5 +47,7 @@ class Claw: public PIDSubsystem {
 	bool initializedPosition;
 	bool backSwitchInit;
 	bool savedPositionExist;
+	float mysetpoint;
+	float myencoder;
 };
 #endif
