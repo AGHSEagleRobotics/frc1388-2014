@@ -32,21 +32,21 @@ void PositionDrive::Execute()
 	float leftPositionSetpoint = leftStick;
 	float rightPositionSetpoint = rightStick;
 	
-	printf("Right Stick: %f, Left Stick: %f \r\n", leftStick, rightStick);
+//	printf("Right Stick: %f, Left Stick: %f \r\n", leftStick, rightStick);
 		
-	printf("Right Count: %f, Left Count: %f \r\n",
-			(float) Robot::driveTrain->leftEncoder->Get(),
-			(float) Robot::driveTrain->rightEncoder->Get());
+//	printf("Right Count: %f, Left Count: %f \r\n",
+//			(float) Robot::driveTrain->leftEncoder->Get(),
+//			(float) Robot::driveTrain->rightEncoder->Get());
 	
 	float leftEncoderPosition = (float) Robot::driveTrain->leftEncoder->GetDistance();
 	float rightEncoderPosition = (float) Robot::driveTrain->rightEncoder->GetDistance();
 	
-	printf("Right Position: %f, Left Position: %f \r\n", rightEncoderPosition, leftEncoderPosition);
+//	printf("Right Position: %f, Left Position: %f \r\n", rightEncoderPosition, leftEncoderPosition);
 	
-	float leftPower = (leftPositionSetpoint - Robot::SignOf(leftEncoderPosition)) * P_VALUE;
-	float rightPower = (rightPositionSetpoint - Robot::SignOf(rightEncoderPosition)) * P_VALUE;
+	float leftPower = (leftPositionSetpoint - leftEncoderPosition) * P_VALUE;
+	float rightPower = (rightPositionSetpoint - rightEncoderPosition) * P_VALUE;
 	
-	printf("Right Power: %f, Left Power: %f \r\n", rightPower, leftPower);
+//	printf("Right Power: %f, Left Power: %f \r\n", rightPower, leftPower);
 	
 	if(fabs(leftStick) < 0.1)
 	{

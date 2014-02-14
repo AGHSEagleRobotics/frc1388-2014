@@ -64,9 +64,6 @@ void SpeedDrive::Execute()
 	
 	Robot::driveTrain->myRobotDrive->TankDrive(leftError, rightError, false);
 	
-//	Robot::driveTrain->leftMotor->Set(leftError);
-//	Robot::driveTrain->rightMotor->Set(rightError);
-	
 	printf("Left Motor Power: %f, Right Motor Power: %f \r\n", Robot::driveTrain->leftMotor->Get(),
 			Robot::driveTrain->rightMotor->Get());
 	
@@ -84,9 +81,6 @@ bool SpeedDrive::IsFinished() {
 void SpeedDrive::End()
 {
 	Robot::driveTrain->myRobotDrive->TankDrive(0.0, 0.0, false);
-	
-//	Robot::driveTrain->leftMotor->Set(0);
-//	Robot::driveTrain->rightMotor->Set(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
