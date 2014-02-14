@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "UnloadShooter.h"
+#define UNLOADING_SPEED 0.3
 UnloadShooter::UnloadShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -17,7 +18,11 @@ UnloadShooter::UnloadShooter() {
 }
 // Called just before this Command runs the first time
 void UnloadShooter::Initialize() {
-	
+	if(Robot::shooter->latchingLimitSwitch->Get() == false)
+	{
+		// TODO: Check the sign of the value being set
+		Robot::shooter->loadingMotor->Set(UNLOADING_SPEED);
+	}
 }
 // Called repeatedly when this Command is scheduled to run
 void UnloadShooter::Execute() {
@@ -25,13 +30,14 @@ void UnloadShooter::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool UnloadShooter::IsFinished() {
-	return false;
+	return Robot::shooter->latchingLimitSwitch->Get();
 }
 // Called once after isFinished returns true
 void UnloadShooter::End() {
-	
+	Robot::shooter->loadingMotor->Set(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void UnloadShooter::Interrupted() {
+	End();
 }
