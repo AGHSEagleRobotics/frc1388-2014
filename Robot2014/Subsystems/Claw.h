@@ -45,9 +45,5 @@ class Claw: public PIDSubsystem {
 	void SetOutputRange(float min, float max);
 	double savePosition;
 	bool initializedPosition;
-	bool backSwitchInit;
-	bool savedPositionExist;
-	float mysetpoint;
-	float myencoder;
-};
+	};
 #endif
