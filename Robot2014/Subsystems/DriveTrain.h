@@ -32,5 +32,6 @@ public:
 	void InitDefaultCommand();
 	void SetRightSetpoint(float setpoint);
 	void SetLeftSetpoint(float setpoint);
+	void AutonomousDrive(float setpoint);
 };
 #endif

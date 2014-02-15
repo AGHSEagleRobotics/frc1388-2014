@@ -24,8 +24,8 @@ void ArcadeDrive::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ArcadeDrive::Execute() {
 	
-	float yValue = Robot::oi->getRightYAxis();
-	float rValue = Robot::oi->getRightXAxis();
+	float yValue = Robot::JoystickDeadband(Robot::oi->getRightYAxis());
+	float rValue = Robot::JoystickDeadband(Robot::oi->getRightXAxis());
 	
 	Robot::driveTrain->myRobotDrive->ArcadeDrive(yValue, rValue, false);
 }
@@ -35,9 +35,10 @@ bool ArcadeDrive::IsFinished() {
 }
 // Called once after isFinished returns true
 void ArcadeDrive::End() {
-	
+	Robot::driveTrain->myRobotDrive->ArcadeDrive(0.0, 0.0, false);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ArcadeDrive::Interrupted() {
+	End();
 }

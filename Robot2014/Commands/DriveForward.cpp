@@ -20,10 +20,11 @@ DriveForward::DriveForward(float power, float time = 1) {
 // Called just before this Command runs the first time
 void DriveForward::Initialize() {
 	SetTimeout(m_time);
+	
 }
 // Called repeatedly when this Command is scheduled to run
 void DriveForward::Execute() {
-	RobotMap::driveTrainMyRobotDrive->TankDrive(m_power,m_power);
+	RobotMap::driveTrainMyRobotDrive->TankDrive(m_power,m_power,false);
 	
 }
 // Make this return true when this Command no longer needs to run execute()

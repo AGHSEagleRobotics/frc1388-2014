@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "LoadShooter.h"
+#define LOADING_SPEED 0.3
 LoadShooter::LoadShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -20,13 +21,14 @@ void LoadShooter::Initialize() {
 	printf("Loading the Shooter! \r\n");
 	
 	loadingTimer.Reset();
-	
 	isTimerRunning = false;
+	
+	Robot::shooter->latch->Set(Relay::kForward);
 	
 	if(Robot::shooter->latchingLimitSwitch->Get() == false)
 	{
 //		TODO: Check the sign of the value being set
-		Robot::shooter->loadingMotor->Set(0.3);
+		Robot::shooter->loadingMotor->Set(LOADING_SPEED);
 	}
 }
 // Called repeatedly when this Command is scheduled to run
@@ -36,17 +38,17 @@ void LoadShooter::Execute() {
 		
 	if(Robot::shooter->latchingLimitSwitch->Get() && !(isTimerRunning))
 	{
+		Robot::shooter->loadingMotor->Set(0);
+		// TODO: Check if kOff is the right call
+		Robot::shooter->latch->Set(Relay::kOff);
 		loadingTimer.Start();
 		isTimerRunning = true;
-//		TODO: Check if kOff is the right call
-		Robot::shooter->latch->Set(Relay::kOff);
-		Robot::shooter->loadingMotor->Set(0);
 	}
 	
 }
 // Make this return true when this Command no longer needs to run execute()
 bool LoadShooter::IsFinished() {
-	return loadingTimer.Get() > 0.2;
+	return loadingTimer.HasPeriodPassed(2);
 }
 // Called once after isFinished returns true
 void LoadShooter::End() {

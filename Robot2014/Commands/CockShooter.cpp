@@ -8,7 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "CockShooter.h"
-#define isCocked Robot::shooter->cockedLimitSwitch->Get()
+#define COCKING_SPEED -0.7
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -18,7 +18,7 @@ CockShooter::CockShooter() {
 }
 // Called just before this Command runs the first time
 void CockShooter::Initialize() {
-	Robot::shooter->loadingMotor->Set(0.3);
+	Robot::shooter->loadingMotor->Set(COCKING_SPEED);
 }
 // Called repeatedly when this Command is scheduled to run
 void CockShooter::Execute() {
@@ -26,7 +26,7 @@ void CockShooter::Execute() {
 }
 // Make this return true when this Command no longer needs to run execute()
 bool CockShooter::IsFinished() {
-	return isCocked;
+	return Robot::shooter->cockedLimitSwitch->Get();
 }
 // Called once after isFinished returns true
 void CockShooter::End() {

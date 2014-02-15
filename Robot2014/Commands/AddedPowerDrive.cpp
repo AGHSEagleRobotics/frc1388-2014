@@ -8,6 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "AddedPowerDrive.h"
+#include "Math.h"
 #define STICKTION_BREAK_FACTOR 0.25
 AddedPowerDrive::AddedPowerDrive() {
 	// Use requires() here to declare subsystem dependencies
@@ -23,33 +24,37 @@ void AddedPowerDrive::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void AddedPowerDrive::Execute() {
 	
+	float addedLeftPower;
+	float addedRightPower;
+	
 	float leftEncoderRate = Robot::driveTrain->leftEncoder->GetRate();
 	float rightEncoderRate = Robot::driveTrain->rightEncoder->GetRate();
 	
-	float leftPower = Robot::oi->getRightYAxis();
-	float rightPower = -(Robot::oi->getLeftYAxis());
-	
-	printf("Left Rate: %f, Right Rate: %f \r\n Left Stick: %f, Right Stick: %f \r\n",
-			leftEncoderRate, rightEncoderRate, leftPower, rightPower);
-	
+	float leftPower = Robot::JoystickDeadband(Robot::oi->getLeftYAxis());
+	float rightPower = Robot::JoystickDeadband(Robot::oi->getRightYAxis());
+		
 //	If the encoders are not moving and power is applied to the joystick then apply a flat voltage
 //		with the stick value to break stickion.
-	if((leftEncoderRate < 1 || rightEncoderRate < 1) && (leftPower > 0.1 || rightPower > 0.1))
+	if(fabs(rightEncoderRate < 1) && fabs(rightPower > 0.1))
 	{
-//		0.25 is still subject to change
-		float addedLeftPower = leftPower + (Robot::SignOf(leftPower) * STICKTION_BREAK_FACTOR);
-		float addedRightPower = rightPower + (Robot::SignOf(rightPower) * STICKTION_BREAK_FACTOR);
-		
-		Robot::driveTrain->myRobotDrive->TankDrive(addedLeftPower, addedRightPower, false);
-		
+		//0.25 is still subject to change
+		addedLeftPower = leftPower + (Robot::SignOf(leftPower) * STICKTION_BREAK_FACTOR);
 	}
 	else
 	{
-		Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, false);
-		
-//		Robot::driveTrain->leftMotor->Set(leftPower);
-//		Robot::driveTrain->rightMotor->Set(rightPower);
+		addedLeftPower = leftPower;
 	}
+	
+	if(fabs(leftEncoderRate < 1) && fabs(leftPower > 0.1))
+	{
+		addedRightPower = rightPower + (Robot::SignOf(rightPower) * STICKTION_BREAK_FACTOR);
+	}
+	else
+	{
+		addedRightPower = rightPower;
+	}
+		
+	Robot::driveTrain->myRobotDrive->TankDrive(addedLeftPower, addedRightPower, false);		
 }
 // Make this return true when this Command no longer needs to run execute()
 bool AddedPowerDrive::IsFinished() {
@@ -57,9 +62,10 @@ bool AddedPowerDrive::IsFinished() {
 }
 // Called once after isFinished returns true
 void AddedPowerDrive::End() {
-	
+	Robot::driveTrain->myRobotDrive->TankDrive(0.0, 0.0, false);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AddedPowerDrive::Interrupted() {
+	End();
 }
