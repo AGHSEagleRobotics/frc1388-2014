@@ -33,7 +33,7 @@ Children:
           validators: null
           value: kDistance
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.05}
+          name: Distance Per Pulse, validators: null, value: 0.0555}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: &id010 [k4X, k2X, k1X]
           default: k4X
@@ -1050,6 +1050,6 @@ Properties:
     validators: null, value: 1388}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
-  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle
-      Robotics\NetBeansProjects', extension: null, folder: true, name: Java Project Directory,
-    validators: null, value: 'C:\Users\Jarrett\NetBeansProjects'}
+  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle\NetBeansProjects',
+    extension: null, folder: true, name: Java Project Directory, validators: null,
+    value: 'C:\Users\Jarrett\NetBeansProjects'}

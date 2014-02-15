@@ -36,6 +36,7 @@ void RotateClaw::Execute() {
 			Robot::claw->SetSetpoint(POSITION_UP);
 			Robot::claw->Reset();
 			Robot::claw->Enable();//enable PID Controller
+			Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
 			Robot::claw->initializedPosition = true;
 		}	
 		if (Robot::claw->backLimitSwitch->Get() == false){
@@ -50,7 +51,17 @@ void RotateClaw::Execute() {
 		{
 			float target = currentPosition + (opStickY * OPSTICK_CONVERSION_FACTOR);
 			Robot::claw->SetSetpoint(target);
-		}	
+			
+			if(Robot::claw->backLimitSwitch->Get() == true){
+						//This code resets the pid controller and the claw encoder so they will function  
+						Robot::claw->Disable();//Disable PID Controller
+						Robot::claw->quadClawEncoder->Reset();
+						Robot::claw->SetSetpoint(POSITION_UP);
+						Robot::claw->Reset();
+						Robot::claw->Enable();//enable PID Controller
+						Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
+			}
+		}		
 	}
 }                                                             
 // Make this return true when this Command no longer needs to run execute()
