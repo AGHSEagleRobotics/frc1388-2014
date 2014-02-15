@@ -33,13 +33,15 @@ void AutonDrive::Execute() {
 	
 	float leftPosition = RobotMap::driveTrainLeftEncoder->GetDistance();
 	float rightPosition = RobotMap::driveTrainRightEncoder->GetDistance();
-	
+	float signedMaxPower = m_maxPower;
 	// set power
 	float leftPower = (m_setpoint - leftPosition) * P_VALUE;
 	float rightPower = (m_setpoint - rightPosition) * P_VALUE;
+	//Set the sign of our max power depending on the direction the robot needs to move
+	signedMaxPower = Robot::SignOf(leftPower) * m_maxPower;
 	//limit to max power passed into the constructor
-	leftPower = (leftPower > m_maxPower) ? m_maxPower : leftPower;
-	rightPower = (rightPower > m_maxPower) ? m_maxPower : rightPower;
+	leftPower = (fabs(leftPower) > fabs(m_maxPower)) ? signedMaxPower : leftPower;
+	rightPower = (fabs(rightPower) > fabs(m_maxPower)) ? signedMaxPower : rightPower;
 	
 	// set power to zero if within our stop margin
 	if(fabs(leftPosition - m_setpoint) < STOP_DISTANCE_MARGIN) leftPower = 0;
