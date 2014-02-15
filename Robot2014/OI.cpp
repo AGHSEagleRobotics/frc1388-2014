@@ -12,6 +12,7 @@
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/AddedPowerDrive.h"
 #include "Commands/ArcadeDrive.h"
+#include "Commands/AutonDrive.h"
 #include "Commands/AutonomousCommand.h"
 #include "Commands/CockShooter.h"
 #include "Commands/CockShooterGroup.h"
@@ -25,7 +26,6 @@
 #include "Commands/GoToUp.h"
 #include "Commands/HalfCockShooter.h"
 #include "Commands/LoadShooter.h"
-#include "Commands/PickUp.h"
 #include "Commands/PositionDrive.h"
 #include "Commands/RestorePosition.h"
 #include "Commands/RotateClaw.h"
@@ -59,8 +59,6 @@ OI::OI() {
 	buttonShoot->WhileHeld(new GoToShoot());
 	buttonUp = new JoystickButton(opStick, 3);
 	buttonUp->WhileHeld(new GoToUp());
-	pickUpButton = new JoystickButton(opStick, 2);
-	pickUpButton->WhenPressed(new PickUp());
 	saveButton = new JoystickButton(opStick, 1);
 	saveButton->WhenPressed(new SavePosition());
 	rightDriverStick = new Joystick(2);
