@@ -10,8 +10,8 @@
 
 
 
-#ifndef SHOOTANDCOCK_H
-#define SHOOTANDCOCK_H
+#ifndef AUTONOMOUSTEST_H
+#define AUTONOMOUSTEST_H
 
 #include "Commands/CommandGroup.h"
 
@@ -20,9 +20,9 @@
  *
  * @author ExampleAuthor
  */
-class ShootAndCock: public CommandGroup {
+class AutonomousTest: public CommandGroup {
 public:	
-	ShootAndCock();
+	AutonomousTest();
 };
 
 #endif

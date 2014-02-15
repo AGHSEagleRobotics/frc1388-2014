@@ -8,16 +8,19 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 
-#include "CockShooterGroup.h"
-#include "CockShooter.h"
-#include "LoadShooter.h"
 
-CockShooterGroup::CockShooterGroup() {
+
+#include "AutonomousTest.h"
+#include "AutonDrive.h"
+AutonomousTest::AutonomousTest() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
 	// these will run in order.
-
+	AddSequential(new AutonDrive(6,0.6));
+	AddSequential(new WaitCommand(10));
+	AddSequential(new AutonDrive(-6,0.6));
+	
 	// To run multiple commands at the same time,
 	// use AddParallel()
 	// e.g. AddParallel(new Command1());
@@ -29,7 +32,4 @@ CockShooterGroup::CockShooterGroup() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	printf("Cocking the Shooter! \r\n");
-	AddSequential(new LoadShooter());
-	AddSequential(new CockShooter());
 }

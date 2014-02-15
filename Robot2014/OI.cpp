@@ -13,6 +13,7 @@
 #include "Commands/AddedPowerDrive.h"
 #include "Commands/ArcadeDrive.h"
 #include "Commands/AutonomousCommand.h"
+#include "Commands/AutonomousTest.h"
 #include "Commands/CockShooter.h"
 #include "Commands/CockShooterGroup.h"
 #include "Commands/Drive.h"
