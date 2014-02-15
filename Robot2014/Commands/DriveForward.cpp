@@ -20,6 +20,7 @@ DriveForward::DriveForward(float power, float time = 1) {
 // Called just before this Command runs the first time
 void DriveForward::Initialize() {
 	SetTimeout(m_time);
+	
 }
 // Called repeatedly when this Command is scheduled to run
 void DriveForward::Execute() {

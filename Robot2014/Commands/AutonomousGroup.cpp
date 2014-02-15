@@ -15,22 +15,21 @@
 #include "DriveForward.h"
 #include "Shoot.h"
 #include "CockShooterGroup.h"
+#include "AutonDrive.h"
 AutonomousGroup::AutonomousGroup() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
 	// these will run in order.
 	//We found out that you must add the parameters to get the sequential to work
-	//TODO: we need to verify the shooting sequence
-	//TODO: need to find out the time parameters for the wait and drive forward commands
-	//TODO: find out how long it takes to get the claw to the zero position
+	// 3 sec to zero out
 	//Don't cock the shooter because the shooter will be pre-cocked
-	AddSequential(new WaitCommand(1));
+	AddSequential(new WaitCommand(3));
 	AddSequential(new GoToShoot());
-	//not full power
-	AddSequential(new DriveForward(1,1));
+	AddSequential(new AutonDrive(11.5));
 	AddSequential(new Shoot());
 	
+	printf("autonomous group");
 
 	// To run multiple commands at the same time,
 	// use AddParallel()

@@ -23,12 +23,13 @@
  */
 class AutonDrive: public Command {
 public:
-	AutonDrive();
+	AutonDrive(float setpoint);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+	float m_setpoint;
 };
 
 #endif
