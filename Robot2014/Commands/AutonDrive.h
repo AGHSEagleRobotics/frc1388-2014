@@ -31,6 +31,7 @@ public:
 	virtual void Interrupted();
 	float m_setpoint;
 	float m_maxPower;
+	bool m_distanceReached;
 };
 
 #endif
