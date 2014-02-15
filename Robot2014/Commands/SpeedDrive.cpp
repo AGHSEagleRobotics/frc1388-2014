@@ -30,13 +30,10 @@ void SpeedDrive::Execute()
 	float rawLeftRate = (float) Robot::driveTrain->leftEncoder->GetRate();
 	float rawRightRate = (float) Robot::driveTrain->rightEncoder->GetRate();
 	
-	printf("Raw Left Rate: %f, Raw Right Rate: %f \r\n", rawLeftRate, rawRightRate);
 	
 	// 16 represents the counts for full speed
 	float scaledLeftRate = (rawLeftRate / 16.0);
 	float scaledRightRate = (rawRightRate / 16.0);
-	
-	// 0.0280499 is the feet per counts on Pheonix
 	
 	float leftError = leftStick - (scaledLeftRate * Robot::SignOf(leftStick));
 	
@@ -63,10 +60,7 @@ void SpeedDrive::Execute()
 	}
 	
 	Robot::driveTrain->myRobotDrive->TankDrive(leftError, rightError, false);
-	
-	printf("Left Motor Power: %f, Right Motor Power: %f \r\n", Robot::driveTrain->leftMotor->Get(),
-			Robot::driveTrain->rightMotor->Get());
-	
+		
 //	if(fabs(leftStick) < 0.05 || fabs(rightStick) < 0.05)
 //	{
 //		Robot::driveTrain->leftEncoder->Reset();

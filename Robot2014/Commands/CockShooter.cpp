@@ -9,6 +9,8 @@
 // it from being updated in th future.
 #include "CockShooter.h"
 #define COCKING_SPEED -0.7
+#define HOLD_SPEED 0.2
+#define BACK_OFF 0.4
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -22,15 +24,27 @@ void CockShooter::Initialize() {
 }
 // Called repeatedly when this Command is scheduled to run
 void CockShooter::Execute() {
+	bool isCocked = Robot::shooter->cockedLimitSwitch->Get();
+	bool tooFar = Robot::shooter->tooFarLimitSwitch->Get();
+	
+	if(isCocked == true)
+	{
+		Robot::shooter->loadingMotor->Set(HOLD_SPEED);
+	}
+	
+	if(tooFar == true)
+	{
+		Robot::shooter->loadingMotor->Set(BACK_OFF);
+	}
 	
 }
 // Make this return true when this Command no longer needs to run execute()
 bool CockShooter::IsFinished() {
-	return Robot::shooter->cockedLimitSwitch->Get();
+	return false;
 }
 // Called once after isFinished returns true
 void CockShooter::End() {
-	Robot::shooter->loadingMotor->Set(0);
+	Robot::shooter->loadingMotor->Set(HOLD_SPEED);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
