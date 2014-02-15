@@ -33,6 +33,7 @@ AutonomousGroup::AutonomousGroup() {
 	AddSequential(new AutonDrive(11.5, 1));
 	AddSequential(new Shoot());
 	
+	printf("autonomous group");
 
 	// To run multiple commands at the same time,
 	// use AddParallel()

@@ -19,11 +19,10 @@ private:
 	JoystickButton* stopFeed;
 	JoystickButton* feedOutNow;
 	JoystickButton* halfCock;
-	JoystickButton* buttonPos4;
+	JoystickButton* buttonRestore;
 	JoystickButton* buttonLoad;
 	JoystickButton* buttonShoot;
 	JoystickButton* buttonUp;
-	JoystickButton* pickUpButton;
 	JoystickButton* saveButton;
 	Joystick* rightDriverStick;
 	JoystickButton* shootButton2;
@@ -46,5 +45,6 @@ public:
 	float getRightYAxis();
 	float getRightZAxis();
 	float getLeftYAxis();
+	float getOpYAxis();
 };
 #endif

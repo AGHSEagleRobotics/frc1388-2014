@@ -24,9 +24,12 @@ void RotateClaw::Initialize() {
 	}
 // Called repeatedly when this Command is scheduled to run
 void RotateClaw::Execute() {
+	//there is a negative in this line beacuse the joystick needed to be inverted 
+	float opStickY = -(Robot::oi->getOpStick()->GetY());
+	float currentPosition = Robot::claw->quadClawEncoder->GetDistance();
+	
 	if (Robot::claw->initializedPosition == false){	
-		//TODO: verify code
-		if(Robot::claw->backLimitSwitch->Get() == true){
+			if(Robot::claw->backLimitSwitch->Get() == true){
 			//This code resets the pid controller and the claw encoder so they will function  
 			Robot::claw->Disable();//Disable PID Controller
 			Robot::claw->quadClawEncoder->Reset();
@@ -38,18 +41,17 @@ void RotateClaw::Execute() {
 		if (Robot::claw->backLimitSwitch->Get() == false){
 			//this code makes the arm go to the zero position if the backlimitswitch is false
 			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
-			
+								
 		}
 	} else {
-		//this command take the absolute value of the joystick value
+				//this command take the absolute value of the joystick value
 		//and if that value is of substantial value then use direct drive
-		if (fabs(Robot::oi->getOpStick()->GetY()) > 0.1)
+		if (fabs(opStickY) > 0.1)
 		{
-			Robot::claw->SetSetpoint(
-					Robot::claw->quadClawEncoder->GetDistance() 
-					+ ((Robot::oi->getOpStick()->GetY()) * OPSTICK_CONVERSION_FACTOR));
-		}
-	}                                                       
+			float target = currentPosition + (opStickY * OPSTICK_CONVERSION_FACTOR);
+			Robot::claw->SetSetpoint(target);
+		}	
+	}
 }                                                             
 // Make this return true when this Command no longer needs to run execute()
 bool RotateClaw::IsFinished() {                                 

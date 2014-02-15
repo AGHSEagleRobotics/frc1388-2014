@@ -32,6 +32,7 @@ Claw::Claw() : PIDSubsystem("Claw", 0.025, 0.0, 0.0) {
 	//Set the intial position to false so we can reset later
 	initializedPosition = false;
 	SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
+	savePosition = (POSITION_SHOOT);
 	
 }
 double Claw::ReturnPIDInput() {
