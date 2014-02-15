@@ -29,11 +29,11 @@ void RotateClaw::Execute() {
 	float currentPosition = Robot::claw->quadClawEncoder->GetDistance();
 	
 	if (Robot::claw->initializedPosition == false){	
-			if(Robot::claw->backLimitSwitch->Get() == true){
+		if(Robot::claw->backLimitSwitch->Get() == true){
 			//This code resets the pid controller and the claw encoder so they will function  
-			Robot::claw->Disable();//Disable PID Controller
+		Robot::claw->Disable();//Disable PID Controller
 			Robot::claw->quadClawEncoder->Reset();
-			Robot::claw->SetSetpoint(POSITION_UP);
+		Robot::claw->SetSetpoint(POSITION_UP);
 			Robot::claw->Reset();
 			Robot::claw->Enable();//enable PID Controller
 			Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
