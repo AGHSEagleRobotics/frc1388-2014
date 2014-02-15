@@ -9,6 +9,9 @@
 // it from being updated in th future.
 #include "AutonDrive.h"
 #include "C:/Windriver/workspace/frc1388-2014/Robot2014/Subsystems/DriveTrain.h"
+#include "math.h"
+#define STOP_DISTANCE_MARGIN 0.2 //0.2 feet is 2.4 inches
+#define P_VALUE 0.6 //proportional constant
 AutonDrive::AutonDrive(float setpoint, float maxPower = 1) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -22,6 +25,7 @@ AutonDrive::AutonDrive(float setpoint, float maxPower = 1) {
 void AutonDrive::Initialize() {
 	RobotMap::driveTrainLeftEncoder->Reset();
 	RobotMap::driveTrainRightEncoder->Reset();
+	m_distanceReached = false;
 }
 // Called repeatedly when this Command is scheduled to run
 void AutonDrive::Execute() {
@@ -29,26 +33,28 @@ void AutonDrive::Execute() {
 	
 	float leftPosition = RobotMap::driveTrainLeftEncoder->GetDistance();
 	float rightPosition = RobotMap::driveTrainRightEncoder->GetDistance();
-	float leftPower = (m_setpoint - leftPosition) * 0.6;
-	float rightPower = (m_setpoint - rightPosition) * 0.6;
+	float signedMaxPower = m_maxPower;
+	// set power
+	float leftPower = (m_setpoint - leftPosition) * P_VALUE;
+	float rightPower = (m_setpoint - rightPosition) * P_VALUE;
+	//Set the sign of our max power depending on the direction the robot needs to move
+	signedMaxPower = Robot::SignOf(leftPower) * m_maxPower;
 	//limit to max power passed into the constructor
-	leftPower = (leftPower > m_maxPower) ? m_maxPower : leftPower;
-	rightPower = (rightPower > m_maxPower) ? m_maxPower : rightPower;
+	leftPower = (fabs(leftPower) > fabs(m_maxPower)) ? signedMaxPower : leftPower;
+	rightPower = (fabs(rightPower) > fabs(m_maxPower)) ? signedMaxPower : rightPower;
+	
+	// set power to zero if within our stop margin
+	if(fabs(leftPosition - m_setpoint) < STOP_DISTANCE_MARGIN) leftPower = 0;
+	if(fabs(rightPosition - m_setpoint) < STOP_DISTANCE_MARGIN) rightPower = 0;
+	if(leftPower == 0 && rightPower == 0) m_distanceReached = true;
+	
+	// drive robot
 	RobotMap::driveTrainMyRobotDrive->TankDrive(leftPower, rightPower, false);
 }
 // Make this return true when this Command no longer needs to run execute()
 																
 bool AutonDrive::IsFinished() {
-	float leftPosition = RobotMap::driveTrainLeftEncoder->GetDistance();
-	float rightPosition = RobotMap::driveTrainRightEncoder->GetDistance();
-	
-	
-	if(leftPosition == m_setpoint && rightPosition == m_setpoint)
-	{
-		return true;
-	}else{
-		return false;
-	}
+	return m_distanceReached;
 }
 // Called once after isFinished returns true
 void AutonDrive::End() {

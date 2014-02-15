@@ -9,6 +9,7 @@
 // it from being updated in th future.
 #include "AutonomousCommand.h"
 #include "AutonomousGroup.h"
+#include "AutonomousTest.h"
 AutonomousCommand::AutonomousCommand() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -17,7 +18,9 @@ AutonomousCommand::AutonomousCommand() {
 }
 // Called just before this Command runs the first time
 void AutonomousCommand::Initialize() {
-	(new AutonomousGroup())->Start();
+//	TODO: set the default autonomous to AutonomousGroup() not AutonomousTest()
+	(new AutonomousTest())->Start();
+//	(new AutonomousGroup())->Start();
 }
 // Called repeatedly when this Command is scheduled to run
 void AutonomousCommand::Execute() {

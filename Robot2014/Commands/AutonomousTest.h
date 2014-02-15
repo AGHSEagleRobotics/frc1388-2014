@@ -9,29 +9,20 @@
 // it from being updated in th future.
 
 
-#ifndef AUTONDRIVE_H
-#define AUTONDRIVE_H
 
+#ifndef AUTONOMOUSTEST_H
+#define AUTONOMOUSTEST_H
 
-#include "Commands/Subsystem.h"
-#include "../Robot.h"
+#include "Commands/CommandGroup.h"
 
 /**
  *
  *
  * @author ExampleAuthor
  */
-class AutonDrive: public Command {
-public:
-	AutonDrive(float setpoint, float maxPower);
-	virtual void Initialize();
-	virtual void Execute();
-	virtual bool IsFinished();
-	virtual void End();
-	virtual void Interrupted();
-	float m_setpoint;
-	float m_maxPower;
-	bool m_distanceReached;
+class AutonomousTest: public CommandGroup {
+public:	
+	AutonomousTest();
 };
 
 #endif

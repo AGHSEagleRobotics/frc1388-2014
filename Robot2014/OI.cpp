@@ -14,6 +14,7 @@
 #include "Commands/ArcadeDrive.h"
 #include "Commands/AutonDrive.h"
 #include "Commands/AutonomousCommand.h"
+#include "Commands/AutonomousTest.h"
 #include "Commands/CockShooter.h"
 #include "Commands/CockShooterGroup.h"
 #include "Commands/Drive.h"
