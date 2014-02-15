@@ -30,7 +30,7 @@ void SpeedDrive::Execute()
 	float rawLeftRate = (float) Robot::driveTrain->leftEncoder->GetRate();
 	float rawRightRate = (float) Robot::driveTrain->rightEncoder->GetRate();
 	
-	printf("Raw Left Rate: %f, Raw Right Rate: %f \r\n", rawLeftRate, rawRightRate);
+	//printf("Raw Left Rate: %f, Raw Right Rate: %f \r\n", rawLeftRate, rawRightRate);
 	
 	// 16 represents the counts for full speed
 	float scaledLeftRate = (rawLeftRate / 16.0);
