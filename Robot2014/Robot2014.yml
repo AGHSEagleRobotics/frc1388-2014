@@ -88,7 +88,7 @@ Children:
           default: '1'
           name: Input Channel (Digital)
           validators: &id002 [DigitalChannel]
-          value: '9'
+          value: '10'
         Input Module (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: &id003 ['1', '2']
           default: '1'
@@ -104,7 +104,7 @@ Children:
           default: '1'
           name: Input Channel (Digital)
           validators: *id002
-          value: '10'
+          value: '9'
         Input Module (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id003
           default: '1'
