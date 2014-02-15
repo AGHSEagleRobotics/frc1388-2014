@@ -24,9 +24,13 @@ AutonomousGroup::AutonomousGroup() {
 	//We found out that you must add the parameters to get the sequential to work
 	// 3 sec to zero out
 	//Don't cock the shooter because the shooter will be pre-cocked
-	AddSequential(new WaitCommand(3));
+	
+	//We have to wait for the claw to zero out before we call GoToShoot()
+	AddSequential(new WaitCommand(3)); 
 	AddSequential(new GoToShoot());
-	AddSequential(new AutonDrive(11.5));
+	//Drive to shooting position
+	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
+	AddSequential(new AutonDrive(11.5, 1));
 	AddSequential(new Shoot());
 	
 
