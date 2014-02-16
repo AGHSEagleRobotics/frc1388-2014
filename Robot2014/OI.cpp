@@ -119,7 +119,7 @@ float OI::getRightXAxis()
 }
 float OI::getRightYAxis()
 {
-	return Robot::JoystickDeadband(rightDriverStick->GetAxis(Joystick::kYAxis));
+	return -(Robot::JoystickDeadband(rightDriverStick->GetAxis(Joystick::kYAxis)));
 }
 float OI::getRightZAxis()
 {
@@ -127,7 +127,7 @@ float OI::getRightZAxis()
 }
 float OI::getLeftYAxis()
 {
-	return Robot::JoystickDeadband(leftDriverStick->GetAxis(Joystick::kYAxis));
+	return -(Robot::JoystickDeadband(leftDriverStick->GetAxis(Joystick::kYAxis)));
 }
 float OI::getOpYAxis()
 {

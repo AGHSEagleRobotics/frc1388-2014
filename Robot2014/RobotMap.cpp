@@ -43,12 +43,12 @@ void RobotMap::init() {
 	clawBackLimitSwitch = new DigitalInput(1, 10);
 	lw->AddSensor("Claw", "BackLimitSwitch", clawBackLimitSwitch);
 	
-	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, true, Encoder::k4X);
+	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "RightEncoder", driveTrainRightEncoder);
 	driveTrainRightEncoder->SetDistancePerPulse(0.00843395);
         driveTrainRightEncoder->SetPIDSourceParameter(Encoder::kRate);
         driveTrainRightEncoder->Start();
-	driveTrainLeftEncoder = new Encoder(1, 1, 1, 2, false, Encoder::k4X);
+	driveTrainLeftEncoder = new Encoder(1, 1, 1, 2, true, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "LeftEncoder", driveTrainLeftEncoder);
 	driveTrainLeftEncoder->SetDistancePerPulse(0.00843395);
         driveTrainLeftEncoder->SetPIDSourceParameter(Encoder::kRate);
@@ -65,7 +65,8 @@ void RobotMap::init() {
         driveTrainMyRobotDrive->SetExpiration(0.1);
         driveTrainMyRobotDrive->SetSensitivity(0.5);
         driveTrainMyRobotDrive->SetMaxOutput(1.0);
-        
+        driveTrainMyRobotDrive->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
+        driveTrainMyRobotDrive->SetInvertedMotor(RobotDrive::kRearRightMotor, true);        
 	shooterLoadingMotor = new Talon(1, 2);
 	lw->AddActuator("Shooter", "LoadingMotor", (Talon*) shooterLoadingMotor);
 	

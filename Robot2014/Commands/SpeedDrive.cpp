@@ -25,7 +25,7 @@ void SpeedDrive::Initialize()
 void SpeedDrive::Execute()
 {
 	float leftStick = Robot::oi->getLeftYAxis();
-	float rightStick = -(Robot::oi->getRightYAxis());
+	float rightStick = Robot::oi->getRightYAxis();
 	
 	float rawLeftRate = (float) Robot::driveTrain->leftEncoder->GetRate();
 	float rawRightRate = (float) Robot::driveTrain->rightEncoder->GetRate();
