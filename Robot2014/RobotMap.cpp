@@ -34,7 +34,7 @@ void RobotMap::init() {
 	clawQuadClawEncoder->SetDistancePerPulse(0.2);
         clawQuadClawEncoder->SetPIDSourceParameter(Encoder::kDistance);
         clawQuadClawEncoder->Start();
-	clawArmMotor = new Talon(1, 8);
+	clawArmMotor = new Talon(1, 8); 
 	lw->AddActuator("Claw", "ArmMotor", (Talon*) clawArmMotor);
 	
 	clawFrontLimitSwitch = new DigitalInput(1, 9);
@@ -43,14 +43,14 @@ void RobotMap::init() {
 	clawBackLimitSwitch = new DigitalInput(1, 10);
 	lw->AddSensor("Claw", "BackLimitSwitch", clawBackLimitSwitch);
 	
-	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, false, Encoder::k4X);
+	driveTrainRightEncoder = new Encoder(1, 3, 1, 4, true, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "RightEncoder", driveTrainRightEncoder);
-	driveTrainRightEncoder->SetDistancePerPulse(0.00843395);
+	driveTrainRightEncoder->SetDistancePerPulse(0.0088098194);
         driveTrainRightEncoder->SetPIDSourceParameter(Encoder::kRate);
         driveTrainRightEncoder->Start();
-	driveTrainLeftEncoder = new Encoder(1, 1, 1, 2, true, Encoder::k4X);
+	driveTrainLeftEncoder = new Encoder(1, 1, 1, 2, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "LeftEncoder", driveTrainLeftEncoder);
-	driveTrainLeftEncoder->SetDistancePerPulse(0.00843395);
+	driveTrainLeftEncoder->SetDistancePerPulse(0.0088098194);
         driveTrainLeftEncoder->SetPIDSourceParameter(Encoder::kRate);
         driveTrainLeftEncoder->Start();
 	driveTrainLeftMotor = new Talon(1, 3);

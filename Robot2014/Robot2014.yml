@@ -176,7 +176,7 @@ Children:
           validators: null
           value: kRate
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.00843395}
+          name: Distance Per Pulse, validators: null, value: 0.0088098194}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id010
           default: k4X
@@ -196,7 +196,7 @@ Children:
           validators: *id014
           value: '3'
         Reverse Direction: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Reverse Direction, validators: null, value: false}
+          name: Reverse Direction, validators: null, value: true}
     - Name: LeftEncoder
       Base: Quadrature Encoder
       Children: []
@@ -220,7 +220,7 @@ Children:
           validators: null
           value: kRate
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.00843395}
+          name: Distance Per Pulse, validators: null, value: 0.0088098194}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id010
           default: k4X
@@ -240,7 +240,7 @@ Children:
           validators: *id014
           value: '1'
         Reverse Direction: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Reverse Direction, validators: null, value: true}
+          name: Reverse Direction, validators: null, value: false}
     - Name: MyRobotDrive
       Base: Robot Drive 2
       Children:
@@ -1066,6 +1066,6 @@ Properties:
     validators: null, value: 1388}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
-  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Jarrett\NetBeansProjects',
-    extension: null, folder: true, name: Java Project Directory, validators: null,
-    value: 'C:\Users\Jarrett\NetBeansProjects'}
+  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle
+      Robotics\NetBeansProjects', extension: null, folder: true, name: Java Project Directory,
+    validators: null, value: 'C:\Users\Jarrett\NetBeansProjects'}

@@ -17,9 +17,9 @@ AutonomousTest::AutonomousTest() {
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
 	// these will run in order.
-	AddSequential(new AutonDrive(6,0.6));
-	AddSequential(new WaitCommand(10));
-	AddSequential(new AutonDrive(-6,0.6));
+	AddSequential(new AutonDrive(6.0833,0.3));
+//	AddSequential(new WaitCommand(10));
+//	AddSequential(new AutonDrive(-6,0.6));
 	
 	// To run multiple commands at the same time,
 	// use AddParallel()
