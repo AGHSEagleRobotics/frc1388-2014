@@ -14,13 +14,13 @@
 //The below numbers are the number of degrees from the straight up position
 #define POSITION_UP			0
 #define POSITION_SHOOT 		45
-#define POSITION_LOAD 		100
+#define POSITION_LOAD 		125
 // I need to make sure this is a motor speed and not a degree
 #define SMALL_MOVEMENT  	.1
-#define CLAW_RANGE_MIN 		-45
-#define CLAW_RANGE_MAX 		100
-#define CLAW_MAX_POWER 		0.25
-#define CLAW_MIN_POWER		-0.25
+#define CLAW_RANGE_MIN 		0
+#define CLAW_RANGE_MAX 		125
+#define CLAW_MAX_POWER 		0.50
+#define CLAW_MIN_POWER		-0.50
 /**
  *
  *

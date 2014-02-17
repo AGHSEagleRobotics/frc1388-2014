@@ -10,7 +10,7 @@
 #include "RotateClaw.h"
 #include "../Subsystems/Claw.h"
 #include <math.h>
-#define OPSTICK_CONVERSION_FACTOR 10
+#define OPSTICK_CONVERSION_FACTOR 15
 RotateClaw::RotateClaw() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -27,13 +27,15 @@ void RotateClaw::Execute() {
 	//there is a negative in this line beacuse the joystick needed to be inverted 
 	float opStickY = -(Robot::oi->getOpStick()->GetY());
 	float currentPosition = Robot::claw->quadClawEncoder->GetDistance();
+	bool backLimit = Robot::claw->backLimitSwitch->Get();
+	float currentsetpoint = Robot::claw->GetSetpoint();
 	
 	if (Robot::claw->initializedPosition == false){	
 		if(Robot::claw->backLimitSwitch->Get() == true){
 			//This code resets the pid controller and the claw encoder so they will function  
-		Robot::claw->Disable();//Disable PID Controller
+			Robot::claw->Disable();//Disable PID Controller
 			Robot::claw->quadClawEncoder->Reset();
-		Robot::claw->SetSetpoint(POSITION_UP);
+			Robot::claw->SetSetpoint(POSITION_UP);
 			Robot::claw->Reset();
 			Robot::claw->Enable();//enable PID Controller
 			Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
@@ -52,16 +54,18 @@ void RotateClaw::Execute() {
 			float target = currentPosition + (opStickY * OPSTICK_CONVERSION_FACTOR);
 			Robot::claw->SetSetpoint(target);
 			
-			if(Robot::claw->backLimitSwitch->Get() == true){
-						//This code resets the pid controller and the claw encoder so they will function  
-						Robot::claw->Disable();//Disable PID Controller
-						Robot::claw->quadClawEncoder->Reset();
-						Robot::claw->SetSetpoint(POSITION_UP);
-						Robot::claw->Reset();
-						Robot::claw->Enable();//enable PID Controller
-						Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
+			
+//			if(Robot::claw->backLimitSwitch->Get() == true){
+//						//This code resets the pid controller and the claw encoder so they will function  
+//						Robot::claw->Disable();//Disable PID Controller
+//						Robot::claw->quadClawEncoder->Reset();
+//						Robot::claw->SetSetpoint(POSITION_UP);
+//						Robot::claw->Reset();
+//						Robot::claw->Enable();//enable PID Controller
+//						Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
 			}
-		}		
+		
+		
 	}
 }                                                             
 // Make this return true when this Command no longer needs to run execute()
