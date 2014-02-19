@@ -11,7 +11,7 @@
 #include "C:/Windriver/workspace/frc1388-2014/Robot2014/Subsystems/DriveTrain.h"
 #include "math.h"
 #define STOP_DISTANCE_MARGIN 0.0833 //0.0833 feet is 1.0 inches
-#define P_VALUE 0.3 //proportional constant
+#define P_VALUE 0.3   //proportional constant
 AutonDrive::AutonDrive(float setpoint, float maxPower = 0.5) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -32,7 +32,7 @@ void AutonDrive::Execute() {
 	// get current distance from the encoders
 	float leftPosition = RobotMap::driveTrainLeftEncoder->GetDistance();
 	float rightPosition = RobotMap::driveTrainRightEncoder->GetDistance();
-	printf("distances: setpoint %f | leftpos %f | rightpos %f |\n\n", m_setpoint, leftPosition, rightPosition);
+//	printf("distances: setpoint %f | leftpos %f | rightpos %f |\n\n", m_setpoint, leftPosition, rightPosition);
 	float signedMaxPower = m_maxPower;
 	// set power
 	float leftPower = (m_setpoint - leftPosition) * P_VALUE;
@@ -44,19 +44,32 @@ void AutonDrive::Execute() {
 	rightPower = (fabs(rightPower) > fabs(m_maxPower)) ? signedMaxPower : rightPower;
 	
 	// set power to zero if within our stop margin
-	if(fabs(leftPosition - m_setpoint) < STOP_DISTANCE_MARGIN) leftPower = 0;
-	if(fabs(rightPosition - m_setpoint) < STOP_DISTANCE_MARGIN) rightPower = 0;
+	if(fabs(leftPosition - m_setpoint) < STOP_DISTANCE_MARGIN)
+	{
+		leftPower = 0;
+	}
+	if(fabs(rightPosition - m_setpoint) < STOP_DISTANCE_MARGIN)
+	{
+		rightPower = 0;
+	}
 	leftPower = (rightPower == 0) ? 0 : leftPower;
 	rightPower = (leftPower == 0) ? 0 : rightPower;
-	if(leftPower == 0 && rightPower == 0) m_distanceReached = true;
-	if (m_distanceReached) 	printf("==================================\nIsFinished\n==========================================\n");
+	if(leftPower == 0 && rightPower == 0)
+	{
+		m_distanceReached = true;
+	}
+	if (m_distanceReached) 
+	{
+		printf("==================================\nIsFinished\n==========================================\n");
+	}
 	
 	// drive robot
 	// 	left encoder doesn't work right. 
 	// 	setting power * p_value causes robot to give more power to left than right when reaching setpoint. 
 	// 	for now use rightPower for left and right.
 //	RobotMap::driveTrainMyRobotDrive->TankDrive(leftPower, rightPower, false);
-	RobotMap::driveTrainMyRobotDrive->TankDrive(rightPower, rightPower, false);
+	// added 0.003797 to try and compensate for the turning motion that automous drive did
+	RobotMap::driveTrainMyRobotDrive->TankDrive(rightPower, (rightPower + 0.003797), false);
 }
 // Make this return true when this Command no longer needs to run execute()
 																
@@ -65,9 +78,10 @@ bool AutonDrive::IsFinished(){
 }
 // Called once after isFinished returns true
 void AutonDrive::End() {
-	
+	RobotMap::driveTrainMyRobotDrive->TankDrive(0.0, 0.0, false);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutonDrive::Interrupted() {
+	End();
 }

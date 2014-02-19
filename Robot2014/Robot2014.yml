@@ -176,7 +176,7 @@ Children:
           validators: null
           value: kRate
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.0088098194}
+          name: Distance Per Pulse, validators: null, value: 0.00837421}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id010
           default: k4X
@@ -220,7 +220,7 @@ Children:
           validators: null
           value: kRate
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.0088098194}
+          name: Distance Per Pulse, validators: null, value: 0.00837821}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id010
           default: k4X
