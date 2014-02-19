@@ -33,9 +33,8 @@ public:
 private:
 	enum state_t {unload, cock, hold};
 	state_t state;
-	bool hasGrabbed;
 	bool isCocked;
-	bool tooFar;
+	bool isLoaded;
 };
 
 #endif
