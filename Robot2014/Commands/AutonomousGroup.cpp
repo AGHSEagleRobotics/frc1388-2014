@@ -14,7 +14,6 @@
 #include "GoToShoot.h"
 #include "DriveForward.h"
 #include "Shoot.h"
-#include "CockShooterGroup.h"
 #include "AutonDrive.h"
 AutonomousGroup::AutonomousGroup() {
 	// Add Commands here:

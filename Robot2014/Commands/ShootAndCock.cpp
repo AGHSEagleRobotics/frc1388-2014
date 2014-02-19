@@ -12,7 +12,6 @@
 
 #include "ShootAndCock.h"
 #include "Shoot.h"
-#include "LoadShooter.h"
 #include "CockShooter.h"
 
 ShootAndCock::ShootAndCock() {
@@ -35,6 +34,5 @@ ShootAndCock::ShootAndCock() {
 	
 	AddSequential(new Shoot());
 	AddSequential(new WaitCommand(2));
-	AddSequential(new LoadShooter());
 	AddSequential(new CockShooter());
 }
