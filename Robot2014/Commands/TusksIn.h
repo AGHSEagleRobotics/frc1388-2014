@@ -9,8 +9,8 @@
 // it from being updated in th future.
 
 
-#ifndef COCKSHOOTER_H
-#define COCKSHOOTER_H
+#ifndef TUSKSIN_H
+#define TUSKSIN_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,20 +21,14 @@
  *
  * @author ExampleAuthor
  */
-class CockShooter: public Command {
+class TusksIn: public Command {
 public:
-	CockShooter();
+	TusksIn();
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
-
-private:
-	enum state_t {unload, cock, hold};
-	state_t state;
-	bool isCocked;
-	bool isLoaded;
 };
 
 #endif
