@@ -58,13 +58,8 @@ void AutonDrive::Execute() {
 	{
 		m_distanceReached = true;
 	}
-	if (m_distanceReached) 
-	{
-		printf("==================================\nIsFinished\n==========================================\n");
-	}
 	
-	// drive robot
-	// 	left encoder doesn't work right. 
+	// drive robot 
 	// 	setting power * p_value causes robot to give more power to left than right when reaching setpoint. 
 	// 	for now use rightPower for left and right.
 //	RobotMap::driveTrainMyRobotDrive->TankDrive(leftPower, rightPower, false);

@@ -19,8 +19,8 @@ AutonomousCommand::AutonomousCommand() {
 // Called just before this Command runs the first time
 void AutonomousCommand::Initialize() {
 //	TODO: set the default autonomous to AutonomousGroup() not AutonomousTest()
-	(new AutonomousTest())->Start();
-//	(new AutonomousGroup())->Start();
+//	(new AutonomousTest())->Start();
+	(new AutonomousGroup())->Start();
 }
 // Called repeatedly when this Command is scheduled to run
 void AutonomousCommand::Execute() {

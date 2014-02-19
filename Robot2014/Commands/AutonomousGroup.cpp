@@ -30,10 +30,9 @@ AutonomousGroup::AutonomousGroup() {
 	AddSequential(new GoToShoot());
 	//Drive to shooting position
 	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
-	AddSequential(new AutonDrive(11.5, 1));
+	AddSequential(new AutonDrive(11.5, 0.6));
 	AddSequential(new Shoot());
 	
-	printf("autonomous group");
 
 	// To run multiple commands at the same time,
 	// use AddParallel()

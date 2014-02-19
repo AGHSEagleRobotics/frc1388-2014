@@ -45,8 +45,8 @@ void Robot::GlobalPeriodic()
 		display.registerData(disp_BattVoltage, 3);
 		disp_BattVoltage.setData(battVoltage);
 	}	
-	SmartDashboard::PutNumber("Shooter Angle", RobotMap::clawQuadClawEncoder->GetDistance());
-	SmartDashboard::PutNumber("Custom Angle", Robot::claw->savePosition);
+	SmartDashboard::PutNumber("Current Arm Angle: ", RobotMap::clawQuadClawEncoder->GetDistance());
+	SmartDashboard::PutNumber("Custom Angle: ", Robot::claw->savePosition);
 	claw->CheckLimits();
 }
 void Robot::RobotInit() {
