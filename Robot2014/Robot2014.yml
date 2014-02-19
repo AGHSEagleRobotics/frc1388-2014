@@ -1,4 +1,4 @@
-Version 0.0.2
+Version 1.0
 
 ---
 Name: Robot2014
@@ -176,7 +176,7 @@ Children:
           validators: null
           value: kRate
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.00843395}
+          name: Distance Per Pulse, validators: null, value: 0.0088098194}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id010
           default: k4X
@@ -220,7 +220,7 @@ Children:
           validators: null
           value: kRate
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.00843395}
+          name: Distance Per Pulse, validators: null, value: 0.0088098194}
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id010
           default: k4X
@@ -294,7 +294,7 @@ Children:
         Safety Enabled: !!robotbuilder.data.properties.BooleanProperty {default: true,
           name: Safety Enabled, validators: null, value: true}
         Left Motor Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Left Motor Inverted, validators: null, value: false}
+          name: Left Motor Inverted, validators: null, value: true}
         Right Motor: !!robotbuilder.data.properties.ChildSelectionProperty
           default: 1
           name: Right Motor
@@ -310,7 +310,7 @@ Children:
           validators: [RobotDrive2, ChildDropdownSelected]
           value: DriveTrain LeftMotor
         Right Motor Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-          name: Right Motor Inverted, validators: null, value: false}
+          name: Right Motor Inverted, validators: null, value: true}
         Safety Expiration Time: !!robotbuilder.data.properties.DoubleProperty {default: 0.1,
           name: Safety Expiration Time, validators: null, value: 0.1}
     Properties:
@@ -1149,6 +1149,6 @@ Properties:
     validators: null, value: 1388}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
-  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle\NetBeansProjects',
-    extension: null, folder: true, name: Java Project Directory, validators: null,
-    value: 'C:\Users\Jarrett\NetBeansProjects'}
+  Java Project Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle
+      Robotics\NetBeansProjects', extension: null, folder: true, name: Java Project Directory,
+    validators: null, value: 'C:\Users\Jarrett\NetBeansProjects'}
