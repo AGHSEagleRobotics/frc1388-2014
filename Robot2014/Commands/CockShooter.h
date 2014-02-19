@@ -29,6 +29,13 @@ public:
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+
+private:
+	enum state_t {unload, cock, hold};
+	state_t state;
+	bool hasGrabbed;
+	bool isCocked;
+	bool tooFar;
 };
 
 #endif

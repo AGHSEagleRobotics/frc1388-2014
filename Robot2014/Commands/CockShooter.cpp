@@ -8,8 +8,9 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "CockShooter.h"
+#define LOADING_SPEED 0.7
 #define COCKING_SPEED -0.7
-#define HOLD_SPEED 0.2
+#define HOLD_SPEED -0.2
 #define BACK_OFF 0.4
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies
@@ -20,23 +21,33 @@ CockShooter::CockShooter() {
 }
 // Called just before this Command runs the first time
 void CockShooter::Initialize() {
-	Robot::shooter->loadingMotor->Set(COCKING_SPEED);
+	state = unload;
 }
 // Called repeatedly when this Command is scheduled to run
 void CockShooter::Execute() {
-	bool isCocked = Robot::shooter->cockedLimitSwitch->Get();
-	bool tooFar = Robot::shooter->tooFarLimitSwitch->Get();
+	isLoaded = Robot::shooter->latchingLimitSwitch->Get();
+	isCocked = Robot::shooter->cockedLimitSwitch->Get();
 	
-	if(isCocked == true)
+	switch(state)
 	{
-		Robot::shooter->loadingMotor->Set(HOLD_SPEED);
+		unload:
+			Robot::shooter->loadingMotor->Set(LOADING_SPEED);
+			if(isLoaded)
+			{
+				state = cock;	
+			}
+		break;
+		cock:
+			Robot::shooter->loadingMotor->Set(COCKING_SPEED);
+			if(isCocked)
+			{
+				state = hold;
+			}
+		break;	
+		hold:
+			Robot::shooter->loadingMotor->Set(HOLD_SPEED);
+		break;
 	}
-	
-	if(tooFar == true)
-	{
-		Robot::shooter->loadingMotor->Set(BACK_OFF);
-	}
-	
 }
 // Make this return true when this Command no longer needs to run execute()
 bool CockShooter::IsFinished() {
@@ -44,7 +55,7 @@ bool CockShooter::IsFinished() {
 }
 // Called once after isFinished returns true
 void CockShooter::End() {
-	Robot::shooter->loadingMotor->Set(HOLD_SPEED);
+	state = hold;
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
