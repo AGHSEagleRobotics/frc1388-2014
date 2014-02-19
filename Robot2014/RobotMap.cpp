@@ -36,7 +36,7 @@ void RobotMap::init() {
 	clawQuadClawEncoder->SetDistancePerPulse(0.055556);
         clawQuadClawEncoder->SetPIDSourceParameter(Encoder::kDistance);
         clawQuadClawEncoder->Start();
-	clawArmMotor = new Talon(1, 8); 
+	clawArmMotor = new Talon(1, 8);
 	lw->AddActuator("Claw", "ArmMotor", (Talon*) clawArmMotor);
 	
 	clawFrontLimitSwitch = new DigitalInput(1, 9);
