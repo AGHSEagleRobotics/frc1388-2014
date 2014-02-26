@@ -16,9 +16,7 @@ private:
 	Joystick* opStick;
 	JoystickButton* tuskButton;
 	JoystickButton* feedInNow;
-	JoystickButton* stopFeed;
 	JoystickButton* feedOutNow;
-	JoystickButton* halfCock;
 	JoystickButton* restoreButton;
 	JoystickButton* buttonLoad;
 	JoystickButton* buttonShoot;

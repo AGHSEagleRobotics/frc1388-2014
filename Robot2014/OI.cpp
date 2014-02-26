@@ -13,16 +13,15 @@
 #include "Commands/AddedPowerDrive.h"
 #include "Commands/AutonDrive.h"
 #include "Commands/AutonomousCommand.h"
+#include "Commands/AutonomousGroup.h"
 #include "Commands/CockShooter.h"
 #include "Commands/Drive.h"
 #include "Commands/DriveStraight.h"
 #include "Commands/FeedIn.h"
-#include "Commands/FeedOff.h"
 #include "Commands/FeedOut.h"
 #include "Commands/GoToLoad.h"
 #include "Commands/GoToShoot.h"
 #include "Commands/GoToUp.h"
-#include "Commands/HalfCockShooter.h"
 #include "Commands/PositionDrive.h"
 #include "Commands/RestorePosition.h"
 #include "Commands/RotateClaw.h"
@@ -43,12 +42,8 @@ OI::OI() {
 	tuskButton->WhileHeld(new TusksIn());
 	feedInNow = new JoystickButton(opStick, 9);
 	feedInNow->WhileHeld(new FeedIn());
-	stopFeed = new JoystickButton(opStick, 10);
-	stopFeed->WhenPressed(new FeedOff());
 	feedOutNow = new JoystickButton(opStick, 8);
 	feedOutNow->WhileHeld(new FeedOut());
-	halfCock = new JoystickButton(opStick, 2);
-	halfCock->WhenPressed(new HalfCockShooter());
 	restoreButton = new JoystickButton(opStick, 12);
 	restoreButton->WhenPressed(new RestorePosition());
 	buttonLoad = new JoystickButton(opStick, 3);
