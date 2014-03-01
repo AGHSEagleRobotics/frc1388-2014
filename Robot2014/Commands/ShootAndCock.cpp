@@ -33,6 +33,5 @@ ShootAndCock::ShootAndCock() {
 	// arm.
 	
 	AddSequential(new Shoot());
-	AddSequential(new WaitCommand(2));
 	AddSequential(new CockShooter());
 }

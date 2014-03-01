@@ -32,12 +32,10 @@ void AddedPowerDrive::Execute() {
 	
 	float leftPower = Robot::JoystickDeadband(Robot::oi->getLeftYAxis());
 	float rightPower = Robot::JoystickDeadband(Robot::oi->getRightYAxis());
-	
-	printf("LeftStick: %f, RightStick: %f \r\n", leftPower, rightPower);
 		
 //	If the encoders are not moving and power is applied to the joystick then apply a flat voltage
 //		with the stick value to break stickion.
-	if(fabs(leftEncoderRate) < 0.5 && fabs(leftPower) > 0.1)
+	if(fabs(leftEncoderRate) < 0.5 && leftPower != 0.0)
 	{
 		//0.25 is still subject to change
 		addedLeftPower = leftPower + (Robot::SignOf(leftPower) * STICKTION_BREAK_FACTOR);
@@ -47,7 +45,7 @@ void AddedPowerDrive::Execute() {
 		addedLeftPower = leftPower;
 	}
 	
-	if(fabs(rightEncoderRate) < 0.5 && fabs(rightPower) > 0.1)
+	if(fabs(rightEncoderRate) < 0.5 && rightPower != 0.0)
 	{
 		addedRightPower = rightPower + (Robot::SignOf(rightPower) * STICKTION_BREAK_FACTOR);
 	}
@@ -57,8 +55,6 @@ void AddedPowerDrive::Execute() {
 	}
 		
 	Robot::driveTrain->myRobotDrive->TankDrive(addedLeftPower, addedRightPower, false);	
-	
-	printf("addedLeftPower: %f, addedRightPower: %f \n\n", addedLeftPower, addedRightPower);
 }
 // Make this return true when this Command no longer needs to run execute()
 bool AddedPowerDrive::IsFinished() {
