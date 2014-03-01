@@ -25,7 +25,7 @@ AutonomousGroup::AutonomousGroup() {
 	//Don't cock the shooter because the shooter will be pre-cocked
 	//TODO: make sure this is set to the default autonomous commmand 
 	//We have to wait for the claw to zero out before we call GoToShoot()
-	AddSequential(new WaitCommand(3)); 
+	AddSequential(new WaitCommand(3));
 	AddSequential(new GoToShoot());
 	//Drive to shooting position
 	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
