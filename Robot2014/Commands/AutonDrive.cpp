@@ -10,7 +10,6 @@
 #include "AutonDrive.h"
 #include "C:/Windriver/workspace/frc1388-2014/Robot2014/Subsystems/DriveTrain.h"
 #include "math.h"
-
 #define STOP_DISTANCE_MARGIN 0.0833 //0.0833 feet is 1.0 inches
 #define P_VALUE 0.3   //proportional constant
 AutonDrive::AutonDrive(float setpoint, float maxPower = 0.5) {
