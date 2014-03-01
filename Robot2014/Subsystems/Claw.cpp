@@ -76,7 +76,7 @@ void Claw::CheckLimits()
 		// if front limit switch is hit this limits the motor from running forward
 		SetOutputRange(CLAW_MIN_POWER,0.0);
 	}
-	else if(backLimitSwitch->Get() == true)
+	if(backLimitSwitch->Get() == true)
 	{
 		// if backlimitswitch is hit this limit the motor from running backwards
 		SetOutputRange(0.0, CLAW_MAX_POWER);
