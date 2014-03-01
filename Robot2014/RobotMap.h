@@ -33,6 +33,7 @@ public:
 	static DigitalInput* shooterLatchingLimitSwitch;
 	static DigitalInput* shooterCockedLimitSwitch;
 	static DigitalInput* shooterTooFarLimitSwitch;
+	static DigitalInput* shooterBackLimitSwitch;
 	static SpeedController* feederFeedMotor;
 	static Compressor* tusksCompressor;
 	static Solenoid* tusksTuskValve;
