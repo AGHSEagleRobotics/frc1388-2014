@@ -48,6 +48,7 @@ void Robot::GlobalPeriodic()
 	SmartDashboard::PutNumber("Current Arm Angle: ", RobotMap::clawQuadClawEncoder->GetDistance());
 	SmartDashboard::PutNumber("Custom Angle: ", Robot::claw->savePosition);
 	claw->CheckLimits();
+	shooter->CheckShooterLimits();
 }
 void Robot::RobotInit() {
 	RobotMap::init();

@@ -24,6 +24,7 @@ Relay* RobotMap::shooterLatch = NULL;
 DigitalInput* RobotMap::shooterLatchingLimitSwitch = NULL;
 DigitalInput* RobotMap::shooterCockedLimitSwitch = NULL;
 DigitalInput* RobotMap::shooterTooFarLimitSwitch = NULL;
+DigitalInput* RobotMap::shooterBackLimitSwitch = NULL;
 SpeedController* RobotMap::feederFeedMotor = NULL;
 Compressor* RobotMap::tusksCompressor = NULL;
 Solenoid* RobotMap::tusksTuskValve = NULL;
@@ -83,6 +84,9 @@ void RobotMap::init() {
 	
 	shooterTooFarLimitSwitch = new DigitalInput(1, 5);
 	lw->AddSensor("Shooter", "TooFarLimitSwitch", shooterTooFarLimitSwitch);
+	
+	shooterBackLimitSwitch = new DigitalInput(1, 13);
+	lw->AddSensor("Shooter", "BackLimitSwitch", shooterBackLimitSwitch);
 	
 	feederFeedMotor = new Talon(1, 4);
 	lw->AddActuator("Feeder", "FeedMotor", (Talon*) feederFeedMotor);
