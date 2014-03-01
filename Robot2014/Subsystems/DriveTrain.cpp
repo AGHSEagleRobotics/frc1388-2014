@@ -32,13 +32,3 @@ void DriveTrain::InitDefaultCommand() {
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-void DriveTrain::AutonomousDrive(float setpoint){
-	leftEncoder->Reset();
-	rightEncoder->Reset();
-	
-	float leftPosition = leftEncoder->GetDistance();
-	float rightPosition = rightEncoder->GetDistance();
-	float leftPower = (setpoint - leftPosition)*0.33;
-	float rightPower = (setpoint - rightPosition)*0.33;
-	myRobotDrive->TankDrive(leftPower, rightPower, false);
-}

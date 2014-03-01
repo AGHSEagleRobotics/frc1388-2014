@@ -27,8 +27,6 @@ void Drive::Execute() {
 	
 	Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, false);
 	
-	printf("Left: %f Right: %f \r\n", (float) Robot::driveTrain->leftEncoder->GetRate(), (float) Robot::driveTrain->rightEncoder->GetRate());
-	
 }
 // Make this return true when this Command no longer needs to run execute()
 bool Drive::IsFinished() {
