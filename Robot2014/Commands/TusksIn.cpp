@@ -21,8 +21,7 @@ void TusksIn::Initialize() {
 }
 // Called repeatedly when this Command is scheduled to run
 void TusksIn::Execute() {
-	printf("running tusks \n \r");
-}
+	}
 // Make this return true when this Command no longer needs to run execute()
 bool TusksIn::IsFinished() {
 	return false;

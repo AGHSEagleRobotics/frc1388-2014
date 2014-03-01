@@ -31,7 +31,7 @@ void RotateClaw::Execute() {
 	float currentsetpoint = Robot::claw->GetSetpoint();
 	
 	if (Robot::claw->initializedPosition == false){	
-		if(Robot::claw->backLimitSwitch->Get() == true){
+		if(backLimit == true){
 			//This code resets the pid controller and the claw encoder so they will function  
 			Robot::claw->Disable();//Disable PID Controller
 			Robot::claw->quadClawEncoder->Reset();
@@ -41,10 +41,10 @@ void RotateClaw::Execute() {
 			Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
 			Robot::claw->initializedPosition = true;
 		}	
-		if (Robot::claw->backLimitSwitch->Get() == false){
+		if (backLimit == false){
 			//this code makes the arm go to the zero position if the backlimitswitch is false
 			Robot::claw->SetSetpointRelative(-SMALL_MOVEMENT);
-								
+			
 		}
 	} else {
 				//this command take the absolute value of the joystick value
@@ -54,7 +54,7 @@ void RotateClaw::Execute() {
 			float target = currentPosition + (opStickY * OPSTICK_CONVERSION_FACTOR);
 			Robot::claw->SetSetpoint(target);
 			
-			
+		//This code is here incase we want to reset the encoder whenever during the game	
 //			if(Robot::claw->backLimitSwitch->Get() == true){
 //						//This code resets the pid controller and the claw encoder so they will function  
 //						Robot::claw->Disable();//Disable PID Controller

@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "SavePosition.h"
-#include "../OI.h"
 SavePosition::SavePosition() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -18,7 +17,7 @@ SavePosition::SavePosition() {
 }
 // Called just before this Command runs the first time
 void SavePosition::Initialize() {
-	 //TODO: make sure PIDGet() is the correct function
+	 //set the variable savePosition to the vlaue of the encoder
 	Robot::claw->savePosition = Robot::claw->quadClawEncoder->GetDistance();
 }
 // Called repeatedly when this Command is scheduled to run

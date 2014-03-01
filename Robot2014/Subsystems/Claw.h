@@ -12,13 +12,15 @@
 #include "Commands/PIDSubsystem.h"
 #include "WPILib.h"
 //The below numbers are the number of degrees from the straight up position
-#define POSITION_UP			0
+#define POSITION_UP			15
 #define POSITION_SHOOT 		45
 #define POSITION_LOAD 		125
-// I need to make sure this is a motor speed and not a degree
+//this is how far we want to set the setpoint effectively setting the motor to go forward
 #define SMALL_MOVEMENT  	.1
+//Sets how far the claw is aloud to go in degrees
 #define CLAW_RANGE_MIN 		0
 #define CLAW_RANGE_MAX 		125
+//Set max motor power this is default. SetOutputRange will change the max powers in specific instances
 #define CLAW_MAX_POWER 		0.50
 #define CLAW_MIN_POWER		-0.50
 /**

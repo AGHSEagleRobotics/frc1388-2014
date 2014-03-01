@@ -70,35 +70,20 @@ void Claw::Reset()
 }
 void Claw::CheckLimits()
 {
+	//	//this command utilizes SetOutputRange to limit the motor based on limit switches
 	float minPower = CLAW_MIN_POWER;
 	float maxPower = CLAW_MAX_POWER;
 	
 	if(frontLimitSwitch->Get() == true)
 	{
 		maxPower = 0;
-	}
+	} 
 	if(backLimitSwitch->Get() == true)
 	{
 		minPower = 0;
 	}
 	
 	SetOutputRange(minPower, maxPower);
-//	//this command utilizes SetOutputRange to limit the motor based on limit switches 
-//	if(frontLimitSwitch->Get() == true)
-//	{
-//		// if front limit switch is hit this limits the motor from running forward
-//		SetOutputRange(CLAW_MIN_POWER,0.0);
-//	}
-//	if(backLimitSwitch->Get() == true)
-//	{
-//		// if backlimitswitch is hit this limit the motor from running backwards
-//		SetOutputRange(0.0, CLAW_MAX_POWER);
-//	}
-//	else 
-//	{
-//		//if neither switch is hit this allows full movement of arm
-//		SetOutputRange(CLAW_MIN_POWER, CLAW_MAX_POWER);
-//	} 
 }
 void Claw::SetOutputRange(float min, float max)
 {
