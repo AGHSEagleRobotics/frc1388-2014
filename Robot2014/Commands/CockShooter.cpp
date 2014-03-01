@@ -8,9 +8,9 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "CockShooter.h"
-#define LOADING_SPEED 0.7
+#define LOADING_SPEED 0.8
 #define COCKING_SPEED -0.7
-#define HOLD_SPEED -0.2
+#define HOLD_SPEED 0
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
