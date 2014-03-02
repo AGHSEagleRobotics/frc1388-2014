@@ -23,6 +23,8 @@ private:
 	JoystickButton* buttonUp;
 	JoystickButton* saveButton;
 	Joystick* rightDriverStick;
+	JoystickButton* unloadShooterNow;
+	JoystickButton* cockTheShooterNow;
 	JoystickButton* shootButton2;
 	Joystick* leftDriverStick;
 	JoystickButton* addDrivePower;

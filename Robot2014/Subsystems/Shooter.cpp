@@ -31,9 +31,20 @@ void Shooter::InitDefaultCommand() {
 void Shooter::CheckShooterLimits()
 {
 	// sets the motor to zero if motor is trying to drive into the extremes of the mechanism
-	if(latchingLimitSwitch->Get() == true && loadingMotor->Get() > 0)
-		loadingMotor->Set(0);
+}
+void Shooter::SetLoadingMotor(float power)
+{
 	
-	if(backLimitSwitch->Get() == true && loadingMotor->Get() < 0)
+	if(latchingLimitSwitch->Get() == true && loadingMotor->Get() > 0)
+	{
 		loadingMotor->Set(0);
+	}
+//	else if(backLimitSwitch->Get() == true && loadingMotor->Get() < 0)
+//	{
+//		loadingMotor->Set(0);
+//	}
+	else
+	{
+		loadingMotor->Set(power);
+	}
 }

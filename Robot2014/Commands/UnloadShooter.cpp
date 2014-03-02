@@ -21,7 +21,7 @@ void UnloadShooter::Initialize() {
 	if(Robot::shooter->latchingLimitSwitch->Get() == false)
 	{
 		// TODO: Check the sign of the value being set
-		Robot::shooter->loadingMotor->Set(UNLOADING_SPEED);
+		Robot::shooter->SetLoadingMotor(UNLOADING_SPEED);
 	}
 }
 // Called repeatedly when this Command is scheduled to run
@@ -34,7 +34,7 @@ bool UnloadShooter::IsFinished() {
 }
 // Called once after isFinished returns true
 void UnloadShooter::End() {
-	Robot::shooter->loadingMotor->Set(0);
+	Robot::shooter->SetLoadingMotor(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

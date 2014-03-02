@@ -9,6 +9,7 @@
 // it from being updated in th future.
 #include "TriggerCommand.h"
 #include "Shoot.h"
+#include "ShootAndCock.h"
 TriggerCommand::TriggerCommand() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -35,7 +36,7 @@ bool TriggerCommand::IsFinished() {
 }
 // Called once after isFinished returns true
 void TriggerCommand::End(){
-	
+	(new ShootAndCock())->Start();
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

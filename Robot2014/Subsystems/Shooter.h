@@ -32,5 +32,6 @@ public:
 	Shooter();
 	void InitDefaultCommand();
 	void CheckShooterLimits();
+	void SetLoadingMotor(float power);
 };
 #endif

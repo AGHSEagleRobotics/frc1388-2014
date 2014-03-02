@@ -8,8 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "CockShooter.h"
-#define LOADING_SPEED 0.8
-#define COCKING_SPEED -0.7
+#define LOADING_SPEED 1
+#define COCKING_SPEED -1
 #define HOLD_SPEED 0
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies
@@ -30,21 +30,21 @@ void CockShooter::Execute() {
 	switch(state)
 	{
 		case unload:
-			Robot::shooter->loadingMotor->Set(LOADING_SPEED);
+			Robot::shooter->SetLoadingMotor(LOADING_SPEED);
 			if(isLoaded)
 			{
 				state = cock;	
 			}
 		break;
 		case cock:
-			Robot::shooter->loadingMotor->Set(COCKING_SPEED);
+			Robot::shooter->SetLoadingMotor(COCKING_SPEED);
 			if(isCocked)
 			{
 				state = hold;
 			}
 		break;	
 		case hold:
-			Robot::shooter->loadingMotor->Set(HOLD_SPEED);
+			Robot::shooter->SetLoadingMotor(HOLD_SPEED);
 			if(isCocked == false)
 			{
 				state = cock;
@@ -58,7 +58,7 @@ bool CockShooter::IsFinished() {
 }
 // Called once after isFinished returns true
 void CockShooter::End() {
-	Robot::shooter->loadingMotor->Set(0);
+	Robot::shooter->SetLoadingMotor(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

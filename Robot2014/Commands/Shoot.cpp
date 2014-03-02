@@ -8,6 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "Shoot.h"
+#define TIMEOUT 1
+#define HALFTIME 0.5
 Shoot::Shoot() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -17,22 +19,27 @@ Shoot::Shoot() {
 }
 // Called just before this Command runs the first time
 void Shoot::Initialize() {
-	Robot::shooter->loadingMotor->Set(0.5);
+	shootTimer.Reset();
+	shootTimer.Start();
+	Robot::shooter->SetLoadingMotor(-1);
 }
 // Called repeatedly when this Command is scheduled to run
 void Shoot::Execute() {
+	Robot::tusks->SetTusks(true);
 	
+	if(shootTimer.Get() > HALFTIME)
+		Robot::shooter->SetLoadingMotor(0.7);
 }
 // Make this return true when this Command no longer needs to run execute()
 bool Shoot::IsFinished() {
-	if(Robot::shooter->backLimitSwitch->Get() == true)
+	if(shootTimer.Get() > TIMEOUT)
 		return true;
 	else
 		return false;
 }
 // Called once after isFinished returns true
 void Shoot::End() {
-	Robot::shooter->loadingMotor->Set(0);
+	Robot::shooter->SetLoadingMotor(0);
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

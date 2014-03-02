@@ -55,8 +55,12 @@ OI::OI() {
 	saveButton->WhenPressed(new SavePosition());
 	rightDriverStick = new Joystick(2);
 	
+	unloadShooterNow = new JoystickButton(rightDriverStick, 7);
+	unloadShooterNow->WhenPressed(new UnloadShooter());
+	cockTheShooterNow = new JoystickButton(rightDriverStick, 6);
+	cockTheShooterNow->WhenPressed(new CockShooter());
 	shootButton2 = new JoystickButton(rightDriverStick, 1);
-	shootButton2->WhenPressed(new Shoot());
+	shootButton2->WhenPressed(new TriggerCommand());
 	leftDriverStick = new Joystick(1);
 	
 	addDrivePower = new JoystickButton(leftDriverStick, 11);
@@ -68,7 +72,7 @@ OI::OI() {
 	driveNow = new JoystickButton(leftDriverStick, 10);
 	driveNow->WhenPressed(new Drive());
 	shootButton1 = new JoystickButton(leftDriverStick, 1);
-	shootButton1->WhenPressed(new Shoot());
+	shootButton1->WhenPressed(new TriggerCommand());
      
         // SmartDashboard Buttons
 	SmartDashboard::PutData("Trigger Command", new TriggerCommand());
