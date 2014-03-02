@@ -47,6 +47,7 @@ void Robot::GlobalPeriodic()
 	}	
 	SmartDashboard::PutNumber("Current Arm Angle: ", RobotMap::clawQuadClawEncoder->GetDistance());
 	SmartDashboard::PutNumber("Custom Angle: ", Robot::claw->savePosition);
+	SmartDashboard::PutBoolean("Shooter is Cocked: ", RobotMap::shooterCockedLimitSwitch->Get());
 	claw->CheckLimits();
 	shooter->CheckShooterLimits();
 }
