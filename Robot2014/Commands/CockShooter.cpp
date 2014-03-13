@@ -10,7 +10,9 @@
 #include "CockShooter.h"
 #define LOADING_SPEED 1
 #define COCKING_SPEED -1
-#define HOLD_SPEED 0
+#define STOPPING_SPEED 0
+// TODO: Do we want to have the motor fight the backdrive with power or will it heat up?
+#define HOLD_SPEED -0.15
 CockShooter::CockShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -26,6 +28,7 @@ void CockShooter::Initialize() {
 void CockShooter::Execute() {
 	isLoaded = Robot::shooter->latchingLimitSwitch->Get();
 	isCocked = Robot::shooter->cockedLimitSwitch->Get();
+	isBacked = Robot::shooter->backLimitSwitch->Get();
 	
 	switch(state)
 	{
@@ -42,7 +45,13 @@ void CockShooter::Execute() {
 			{
 				state = hold;
 			}
-		break;	
+		break;
+		case end:
+			Robot::shooter->SetLoadingMotor(STOPPING_SPEED);
+			if(isBacked)
+			{
+				state = unload;
+			}
 		case hold:
 			Robot::shooter->SetLoadingMotor(HOLD_SPEED);
 			if(isCocked == false)

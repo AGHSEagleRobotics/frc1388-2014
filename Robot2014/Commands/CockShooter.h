@@ -31,10 +31,11 @@ public:
 	virtual void Interrupted();
 
 private:
-	enum state_t {unload, cock, hold};
+	enum state_t {unload, cock, end, hold};
 	state_t state;
 	bool isCocked;
 	bool isLoaded;
+	bool isBacked;
 };
 
 #endif
