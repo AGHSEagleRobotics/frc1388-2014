@@ -33,7 +33,7 @@ AutonomousGroup::AutonomousGroup() {
 	AddSequential(new WaitCommand(2));
 	AddSequential(new AutoTusks());
 	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
-	AddSequential(new AutonDrive(11.5, 0.6));
+	AddSequential(new AutonDrive(9, 0.6));
 	AddSequential(new ShootAndCock());
 	
 
