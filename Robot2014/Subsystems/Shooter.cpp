@@ -39,10 +39,10 @@ void Shooter::SetLoadingMotor(float power)
 	{
 		loadingMotor->Set(0);
 	}
-//	else if(backLimitSwitch->Get() == true && loadingMotor->Get() < 0)
-//	{
-//		loadingMotor->Set(0);
-//	}
+	else if(backLimitSwitch->Get() == true && loadingMotor->Get() < 0)
+	{
+		loadingMotor->Set(0);
+	}
 	else
 	{
 		loadingMotor->Set(power);

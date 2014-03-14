@@ -8,8 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "Shoot.h"
-#define TIMEOUT 2
-#define HALFTIME 1
+#define TIMEOUT 3
+//#define HALFTIME 1
 Shoot::Shoot() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -26,13 +26,14 @@ void Shoot::Initialize() {
 }
 // Called repeatedly when this Command is scheduled to run
 void Shoot::Execute() {
-	printf("Time = %f", shootTimer.Get());
-	if(shootTimer.Get() > HALFTIME)
-		Robot::shooter->SetLoadingMotor(0.7);
+//	printf("Time = %f", shootTimer.Get());
+//	if(shootTimer.Get() > HALFTIME)
+//		Robot::shooter->SetLoadingMotor(0.7);
 }
 // Make this return true when this Command no longer needs to run execute()
 bool Shoot::IsFinished() {
-	if(shootTimer.Get() > TIMEOUT)
+//	if(shootTimer.Get() > TIMEOUT)
+	if(Robot::shooter->backLimitSwitch->Get() == true || shootTimer.Get() > TIMEOUT)
 		return true;
 	else
 		return false;
