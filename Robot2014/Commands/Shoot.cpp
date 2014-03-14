@@ -29,11 +29,17 @@ void Shoot::Execute() {
 //	printf("Time = %f", shootTimer.Get());
 //	if(shootTimer.Get() > HALFTIME)
 //		Robot::shooter->SetLoadingMotor(0.7);
+	bool backLimitSwitch = Robot::shooter->backLimitSwitch->Get();
+	if(backLimitSwitch);
+	{
+	printf("Back Limit Switch is TRUE! \r\n");
+	}
 }
 // Make this return true when this Command no longer needs to run execute()
 bool Shoot::IsFinished() {
 //	if(shootTimer.Get() > TIMEOUT)
-	if(Robot::shooter->backLimitSwitch->Get() == true || shootTimer.Get() > TIMEOUT)
+	bool backLimitSwitch = Robot::shooter->backLimitSwitch->Get();
+	if(backLimitSwitch == true || shootTimer.Get() > TIMEOUT)
 		return true;
 	else
 		return false;
