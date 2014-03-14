@@ -21,12 +21,12 @@ Shoot::Shoot() {
 void Shoot::Initialize() {
 	shootTimer.Reset();
 	shootTimer.Start();
+	Robot::tusks->SetTusks(false);
 	Robot::shooter->SetLoadingMotor(-1);
 }
 // Called repeatedly when this Command is scheduled to run
 void Shoot::Execute() {
-	Robot::tusks->SetTusks(true);
-	
+	printf("Time = %f", shootTimer.Get());
 	if(shootTimer.Get() > HALFTIME)
 		Robot::shooter->SetLoadingMotor(0.7);
 }

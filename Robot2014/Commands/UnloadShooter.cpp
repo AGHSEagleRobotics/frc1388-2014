@@ -8,7 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "UnloadShooter.h"
-#define UNLOADING_SPEED 0.3
+#define UNLOADING_SPEED 0.7
 UnloadShooter::UnloadShooter() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);

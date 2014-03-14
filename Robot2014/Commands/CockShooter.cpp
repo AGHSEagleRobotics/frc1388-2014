@@ -28,7 +28,7 @@ void CockShooter::Initialize() {
 void CockShooter::Execute() {
 	isLoaded = Robot::shooter->latchingLimitSwitch->Get();
 	isCocked = Robot::shooter->cockedLimitSwitch->Get();
-	isBacked = Robot::shooter->backLimitSwitch->Get();
+//	isBacked = Robot::shooter->backLimitSwitch->Get();
 	
 	switch(state)
 	{
@@ -37,6 +37,7 @@ void CockShooter::Execute() {
 			if(isLoaded)
 			{
 				state = cock;	
+				printf("State is Cock! \r\n");
 			}
 		break;
 		case cock:
@@ -44,18 +45,20 @@ void CockShooter::Execute() {
 			if(isCocked)
 			{
 				state = hold;
+				printf("State is Hold! \r\n");
 			}
 		break;
-		case end:
-			Robot::shooter->SetLoadingMotor(STOPPING_SPEED);
-			if(isBacked)
-			{
-				state = unload;
-			}
+//		case end:
+//			Robot::shooter->SetLoadingMotor(STOPPING_SPEED);
+//			if(isBacked)
+//			{
+//				state = unload;
+//			}
 		case hold:
 			Robot::shooter->SetLoadingMotor(HOLD_SPEED);
 			if(isCocked == false)
 			{
+				printf("State is Cock! \r\n");
 				state = cock;
 			}
 		break;
