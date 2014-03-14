@@ -8,8 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in th future.
 #include "Shoot.h"
-#define TIMEOUT 1
-#define HALFTIME 0.5
+#define TIMEOUT 2
+#define HALFTIME 1
 Shoot::Shoot() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
