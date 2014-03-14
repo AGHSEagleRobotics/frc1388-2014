@@ -65,8 +65,6 @@ void RotateClaw::Execute() {
 //						Robot::claw->SetInputRange(CLAW_RANGE_MIN,CLAW_RANGE_MAX);
 			}
 		
-		printf("Encoder Value: %f", Robot::claw->quadClawEncoder->GetDistance());
-		
 	}
 }                                                             
 // Make this return true when this Command no longer needs to run execute()

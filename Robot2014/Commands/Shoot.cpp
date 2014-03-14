@@ -23,6 +23,7 @@ void Shoot::Initialize() {
 	shootTimer.Start();
 	Robot::tusks->SetTusks(false);
 	Robot::shooter->SetLoadingMotor(-1);
+	printf("Shoot has started \r\n");
 }
 // Called repeatedly when this Command is scheduled to run
 void Shoot::Execute() {
@@ -30,9 +31,13 @@ void Shoot::Execute() {
 //	if(shootTimer.Get() > HALFTIME)
 //		Robot::shooter->SetLoadingMotor(0.7);
 	bool backLimitSwitch = Robot::shooter->backLimitSwitch->Get();
-	if(backLimitSwitch);
+	if(backLimitSwitch)
 	{
 	printf("Back Limit Switch is TRUE! \r\n");
+	}
+	else
+	{
+		printf("Back Limit Switch is FALSE! \r\n");
 	}
 }
 // Make this return true when this Command no longer needs to run execute()
@@ -47,6 +52,8 @@ bool Shoot::IsFinished() {
 // Called once after isFinished returns true
 void Shoot::End() {
 	Robot::shooter->SetLoadingMotor(0);
+	printf("Shoot has ended \r\n");
+
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
