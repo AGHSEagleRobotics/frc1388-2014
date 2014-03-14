@@ -17,11 +17,22 @@ FeedIn::FeedIn() {
 }
 // Called just before this Command runs the first time
 void FeedIn::Initialize() {
+	isFeederRunning = false;
 }
 // Called repeatedly when this Command is scheduled to run
 void FeedIn::Execute() {
 //	Feeeds the balls in
-	Robot::feeder->feedMotor->Set(1);
+	if(isFeederRunning == false)
+	{
+		Robot::feeder->feedMotor->Set(1);
+		isFeederRunning = true;
+	}
+	
+	if(isFeederRunning == true && Robot::oi->getOpStick()->GetRawButton(2))
+	{
+		Robot::feeder->feedMotor->Set(0);
+		isFeederRunning = false;
+	}
 }
 // Make this return true when this Command no longer needs to run execute()
 bool FeedIn::IsFinished() {

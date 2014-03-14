@@ -25,7 +25,7 @@ void Drive::Execute() {
 	float leftPower = Robot::JoystickDeadband(Robot::oi->getLeftYAxis());
 	float rightPower = Robot::JoystickDeadband(Robot::oi->getRightYAxis());
 	
-	Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, false);
+	Robot::driveTrain->myRobotDrive->TankDrive(leftPower, rightPower, true);
 	
 }
 // Make this return true when this Command no longer needs to run execute()

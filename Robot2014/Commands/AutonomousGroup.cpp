@@ -12,7 +12,8 @@
 
 #include "AutonomousGroup.h"
 #include "GoToShoot.h"
-
+#include "CockShooter.h"
+#include "ShootAndCock.h"
 #include "Shoot.h"
 #include "AutonDrive.h"
 AutonomousGroup::AutonomousGroup() {
@@ -26,11 +27,13 @@ AutonomousGroup::AutonomousGroup() {
 	//TODO: make sure this is set to the default autonomous commmand 
 	//We have to wait for the claw to zero out before we call GoToShoot()
 	AddSequential(new WaitCommand(1));
+	AddParallel(new CockShooter());
 	AddSequential(new GoToShoot());
 	//Drive to shooting position
+	AddSequential(new WaitCommand(3));
 	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
 	AddSequential(new AutonDrive(11.5, 0.6));
-	AddSequential(new Shoot());
+	AddSequential(new ShootAndCock());
 	
 
 	// To run multiple commands at the same time,
