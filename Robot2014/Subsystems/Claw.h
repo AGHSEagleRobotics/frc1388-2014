@@ -13,7 +13,7 @@
 #include "WPILib.h"
 //The below numbers are the number of degrees from the straight up position
 #define POSITION_UP			0
-#define POSITION_SHOOT 		45
+#define POSITION_SHOOT 		40
 #define POSITION_LOAD 		125
 //this is how far we want to set the setpoint effectively setting the motor to go forward
 #define SMALL_MOVEMENT  	.1
