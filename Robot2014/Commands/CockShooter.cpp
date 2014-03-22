@@ -24,7 +24,6 @@ CockShooter::CockShooter() {
 void CockShooter::Initialize() {
 	state = unload;
 	printf("Started CockShooter \r\n");
-
 }
 // Called repeatedly when this Command is scheduled to run
 void CockShooter::Execute() {
@@ -74,7 +73,6 @@ bool CockShooter::IsFinished() {
 void CockShooter::End() {
 	Robot::shooter->SetLoadingMotor(0);
 	printf("Finished CockShooter \r\n");
-
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

@@ -53,7 +53,6 @@ bool Shoot::IsFinished() {
 void Shoot::End() {
 	Robot::shooter->SetLoadingMotor(0);
 	printf("Shoot has ended \r\n");
-
 }
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

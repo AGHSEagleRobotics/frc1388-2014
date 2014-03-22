@@ -28,7 +28,7 @@ void RotateClaw::Execute() {
 	float opStickY = -(Robot::oi->getOpStick()->GetY());
 	float currentPosition = Robot::claw->quadClawEncoder->GetDistance();
 	bool backLimit = Robot::claw->backLimitSwitch->Get();
-	float currentsetpoint = Robot::claw->GetSetpoint();
+	//float currentsetpoint = Robot::claw->GetSetpoint();
 	
 	if (Robot::claw->initializedPosition == false){	
 		if(backLimit == true){
