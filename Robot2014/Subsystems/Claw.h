@@ -16,7 +16,7 @@
 #define POSITION_SHOOT 		40
 #define POSITION_LOAD 		125
 //this is how far we want to set the setpoint effectively setting the motor to go forward
-#define SMALL_MOVEMENT  	.1
+#define SMALL_MOVEMENT  	.2
 //Sets how far the claw is aloud to go in degrees
 #define CLAW_RANGE_MIN 		0
 #define CLAW_RANGE_MAX 		125

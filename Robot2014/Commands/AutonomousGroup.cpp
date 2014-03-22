@@ -17,24 +17,28 @@
 #include "Shoot.h"
 #include "AutonDrive.h"
 #include "AutoTusks.h"
+#include "GoToUp.h"
 AutonomousGroup::AutonomousGroup() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
 	// these will run in order.
-	//We found out that you must add the parameters to get the sequential to work
-	// 3 sec to zero out
-	//Don't cock the shooter because the shooter w ill be pre-cocked
-	//We have to wait for the claw to zero out before we call GoToShoot()
+	
+	//Starts the shoooter cocking and the wait makes sure the shooter is cocked: start at time 0 and ends at 3 seconds 
 	AddParallel(new CockShooter());
-	AddSequential(new WaitCommand(1));
-	AddSequential(new GoToShoot());
-	//Drive to shooting position
-	AddSequential(new WaitCommand(2));
+	AddSequential(new WaitCommand(3));
+	//Clamps tusks, moves claw to shoot and drives the robot all at the same time: start3seconds finish drive at 6seconds
 	AddSequential(new AutoTusks());
-	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
+	AddSequential(new GoToShoot());
 	AddSequential(new AutonDrive(8, 0.6));
-	AddSequential(new ShootAndCock());
+	//Shoots and waits so the shooter is done shooting so when we GoToUp we are still accurate: starts at 6 seconds and keeps running
+	AddParallel(new ShootAndCock());
+	AddSequential(new WaitCommand(2));
+	//Takes the shooter to the up position to start the round starts and get closer to calibration in the chance calibration isn't finished: at 8 seconds and ends at 9 seconds
+	AddSequential(new GoToUp());
+	
+	//parameter is feet to drive forward. 11.5 is our current estimate for optimal range
+//	AddSequential(new AutonDrive(8, 0.6));
 	
 
 	// To run multiple commands at the same time,
