@@ -30,24 +30,21 @@ void Shooter::InitDefaultCommand() {
 // here. Call these from Commands.
 void Shooter::CheckShooterLimits()
 {
-	// sets the motor to zero if motor is trying to drive into the extremes of the mechanism
 }
 void Shooter::SetLoadingMotor(float power)
 {
 	
+	// sets the motor to zero if motor is trying to drive into the extremes of the mechanism
+	if((latchingLimitSwitch->Get() == true) && (power >= 0))
+	{
+		power = 0;
+	}
 	
-	if(latchingLimitSwitch->Get() == true && loadingMotor->Get() > 0)
+	if((backLimitSwitch->Get() == true) && (power <= 0))
 	{
-		loadingMotor->Set(0);
-		
+		power = 0;
 	}
-	else if(backLimitSwitch->Get() == true && loadingMotor->Get() < 0)
-	{
-		loadingMotor->Set(0);
-		printf("Back Limit Switch is TRUE! \r\n");
-	}
-	else
-	{
-		loadingMotor->Set(power);
-	}
+
+	loadingMotor->Set(power);
+	
 }

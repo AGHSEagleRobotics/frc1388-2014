@@ -18,15 +18,10 @@ UnloadShooter::UnloadShooter() {
 }
 // Called just before this Command runs the first time
 void UnloadShooter::Initialize() {
-	if(Robot::shooter->latchingLimitSwitch->Get() == false)
-	{
-		// TODO: Check the sign of the value being set
-		Robot::shooter->SetLoadingMotor(UNLOADING_SPEED);
-	}
 }
 // Called repeatedly when this Command is scheduled to run
 void UnloadShooter::Execute() {
-	
+	Robot::shooter->SetLoadingMotor(UNLOADING_SPEED);	
 }
 // Make this return true when this Command no longer needs to run execute()
 bool UnloadShooter::IsFinished() {
